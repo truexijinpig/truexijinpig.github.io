@@ -180,7 +180,7 @@ window.onload=()=>{playAudio();};
 const player = document.getElementById("player");
 
 function playAudio() {
-    player.volume=10;
+    player.volume=1;
     player.play();
 }
 
@@ -192,7 +192,7 @@ gi("hear").addEventListener("click",()=>{
     css(gi("back"),{background:"-webkit-linear-gradient(50deg , #220000 , #110000)"});
     gi("main").innerText=``;
     gi("main").appendChild(video);
-    video.volume=10;
+    video.volume=1;
     video.play();
     css(gi("hear"),{display:"none"});
     hf();
@@ -251,3 +251,4 @@ function dc(ty,id,tx,ht){
 </script>
 </body>
     
+
