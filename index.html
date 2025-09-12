@@ -161,14 +161,14 @@ footer img:hover{
 </footer>
 
 
-
+<audio id="player" src="ring.mp3" hidden loop></audio>
 <script>
 var video=dc("video","video");
 video.controls="";
 video.src = "movie.mp4";
 video.load();
 
-let gt=['中國贏麻了','GDP再創新高','器官捐贈天下第一','千秋萬載一桶江湖','先服永享受雨天騎',"我們懷念他",""];
+let gt=['中國贏麻了','GDP再創新高','器官捐贈天下第一','千秋萬載一桶江湖','先服永享受雨天騎',"我們懷念他","想開心了?","去新疆!"];
 for (let i=0;i<100;i++){
     let nt= parseInt(gt.length*Math.random());
     let el=dc("p",undefined,gt[nt]);
@@ -176,12 +176,27 @@ for (let i=0;i<100;i++){
     css(el,{left:Math.random()*60-30+i+"vw",top:Math.random()*60+i-30+"vh",transform:`rotateZ(${Math.random()*10-20}deg)`,fontSize:Math.random()*5+"vh"})
 }
 
+window.onload=()=>{playAudio();};
+const player = document.getElementById("player");
+
+function playAudio() {
+    player.volume=10;
+    player.play();
+}
+
+function pauseAudio() {
+      player.pause();
+}
+
 gi("hear").addEventListener("click",()=>{
     css(gi("back"),{background:"-webkit-linear-gradient(50deg , #220000 , #110000)"});
     gi("main").innerText=``;
     gi("main").appendChild(video);
+    video.volume=10;
+    video.play();
     css(gi("hear"),{display:"none"});
     hf();
+    pauseAudio();
 });
 
 video.addEventListener("ended", () => {
