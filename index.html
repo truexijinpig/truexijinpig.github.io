@@ -176,9 +176,9 @@ for (let i=0;i<100;i++){
     css(el,{left:Math.random()*60-30+i+"vw",top:Math.random()*60+i-30+"vh",transform:`rotateZ(${Math.random()*10-20}deg)`,fontSize:Math.random()*5+"vh"})
 }
 
-/*window.onload=()=>{*/playAudio();/*};*/
+/*window.onload=()=>{};*/
 const player = document.getElementById("player");
-
+player.onload=()=>{playAudio();};
 function playAudio() {
     player.volume=1;
     player.play();
@@ -251,6 +251,7 @@ function dc(ty,id,tx,ht){
 </script>
 </body>
     
+
 
 
 
