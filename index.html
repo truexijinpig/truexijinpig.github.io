@@ -28,12 +28,13 @@
     <link data-default-icon="xi.jpg" rel="shortcut icon"
         type="image/x-icon" href="xi.jpg" />
     <meta property="og:site_name" content="與習近平對話" />
-    <meta property="og:title" content="與習近平對話" />
+    <meta property="og:title" content="習近平打電話給你" />
     <meta property="og:image" content="xi.jpg" />
     <meta property="fb:app_id" content="124024574287414" />
     <meta name="description"
         content="與習近平對話" />
-
+<meta name="og:description"
+        content="與習近平對話" />
     <meta name="application-title" content="與習近平對話" />
     <meta name="color-scheme" content="light" />
 <style>
@@ -157,7 +158,7 @@ footer img:hover{
 <footer>
 <a href="https://www.threads.com/@true_jinpigxi" target="_blank"><img src="th.ico" alt="Threads"></a>
 <a href="https://www.instagram.com/true_jinpigxi" target="_blank"><img src="ig.png" alt="Instagram"></a>
-<a href="https://discord.gg/v7U6fRAK" target="_blank"><img src="dc.ico" alt="Discord"></a>
+<a href="https://discord.gg/v7U6fRAK" target="_blank"><img src="dc.ico" alt="Discord"></a><a href="/tic">約</a>
 </footer>
 
 
@@ -168,7 +169,7 @@ video.controls="";
 video.src = "movie.mp4";
 video.load();
 
-let gt=['中國贏麻了','GDP再創新高','器官捐贈天下第一','千秋萬載一桶江湖','先服永享受雨天騎',"我們懷念他","想開心了?","去新疆!"];
+let gt=['中國贏麻了','GDP再創新高','器官捐贈天下第一','千秋萬載一桶江湖','先服永享受雨天騎',"我們懷念他","想開心了?","去新疆!","不同意的請舉手","愛我才是愛國","親自部署，親自指揮","通商寬衣，不強自習"];
 for (let i=0;i<100;i++){
     let nt= parseInt(gt.length*Math.random());
     let el=dc("p",undefined,gt[nt]);
@@ -177,8 +178,9 @@ for (let i=0;i<100;i++){
 }
 
 /*window.onload=()=>{};*/
+var playedd=false;
 const player = document.getElementById("player");
-window.onload=()=>{playAudio();};
+document.onclick=()=>{if (playedd==false){playAudio();playedd=1}};
 function playAudio() {
     player.volume=1;
     player.play();
@@ -251,7 +253,6 @@ function dc(ty,id,tx,ht){
 </script>
 </body>
     
-
 
 
 
