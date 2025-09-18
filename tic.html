@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+
+<head>
+    <title>預約與習近平見面</title>
+    <link data-default-icon="xi.jpg" rel="icon"
+        sizes="192x192" href="xi.jpg" />
+    <meta name="bingbot" content="noarchive" />
+    <meta name="robots" content="noarchive, noimageindex" />
+    <meta name="copyright" content="中國北京市公安處" />
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta id="viewport" name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, viewport-fit=cover" />
+    <meta name="theme-color" content="#FF0000" />
+    <meta name="theme-color" content="#8c0500" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" sizes="76x76"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="120x120"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="152x152"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="167x167"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="xi.jpg" />
+    <link data-default-icon="xi.jpg" rel="shortcut icon"
+        type="image/x-icon" href="xi.jpg" />
+    <meta property="og:site_name" content="與習近平對話" />
+    <meta property="og:title" content="與習近平對話" />
+    <meta property="og:image" content="xi.jpg" />
+    <meta property="og:site_name" content="習近平邀請你"/>
+    <meta property="fb:app_id" content="124024574287414" />
+    <meta name="description"
+        content="與習近平對話" />
+
+    <meta name="application-title" content="與習近平對話" />
+    <meta name="color-scheme" content="light" />
+<style>
+    #back{
+        background: -webkit-linear-gradient(50deg , #8c0000 , #350000);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+    }
+    #back>p{
+        color: #fff1;
+        text-wrap: nowrap;
+        position: fixed;
+    }
+h1{
+font-size: 3vh;margin: 1vh;background: linear-gradient(50deg, #fff , #ffff00,#fff) text;color: #0000;
+}
+h2{
+font-size: 2vh; color: #fff180;margin: 1vh;}
+main{
+position: fixed;
+top: 0;
+left: 0;
+display: flex;
+height: 70vh;
+width: 100vw;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+}
+#xih{
+border-radius: 9vh;
+height: 20vh;
+width: 20vh;
+animation: xh 0.2s  infinite;
+}
+#hear{
+
+position: fixed;
+top: 60vh;
+left: 50vw;
+height: 5vh;
+width: 5vh;
+padding: 2vh;
+border-radius: 5vh;
+background: #2e3d38;
+animation: ph ease 0.5s infinite;
+cursor: pointer;
+z-index: 5;
+
+}
+
+@keyframes ph{
+    0%{
+        transform: translateX(-55%) rotateZ(-5deg);
+    }
+    50%{
+        transform: translateX(-45%) rotateZ(5deg);
+    }
+    100%{
+        transform: translateX(-55%) rotateZ(-5deg);
+    }
+}
+@keyframes xh{
+    0%{
+        transform: translateY(1px) ;
+    }
+    50%{
+        transform: translateY(-0.5vh) ;
+    }
+    100%{
+        transform: translateY(1px) ;
+    }
+}
+
+#top{
+ position: fixed;
+top: 2vh;
+left: 50vw;
+padding: 1vh;
+border-radius: 5vh;
+font-size:2vh;
+ color: #fff;
+ background: #2225;
+ border-radius: 2vh;
+ box-shadow:0 0 1vh #ddd5;
+ backdrop-filter:blur(1px);
+ border:none;
+z-index: 6;
+transform:translateX(-50%);
+transition:all 0.2s ease;
+text-wrap:nowrap;
+}
+
+footer{
+    top: 70vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    position: fixed;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    
+}
+footer img{
+    width: 5vh;
+    height: 5vh;
+    border-radius: 5vh;
+    cursor: pointer;
+    margin: 1vh;
+    
+}
+footer>*{
+    transition: all 0.5s ease;
+    text-align:center;
+    font-size:2vh;
+    color:#ddd;
+}
+footer img:hover{
+    box-shadow: 0 0 1vh #fff3;
+}
+#video{
+    width: 80vw;
+    height: 40vw;
+    border-radius: 5vh;
+    background: #0003;
+}
+#name{
+ padding: 1vh;
+ margin:  1vh 0;
+ color: #fff;
+ text-shadow:0 1px 1vh #000;
+ background: #ddd5;
+ border-radius: 2vh;
+ box-shadow:0 0 1vh #ddd5;
+ backdrop-filter:blur(1px);
+ font-size:2vh;
+ border:none;
+}
+#name::placeholder{
+ color:#f99;
+}
+#subit{
+ padding: 1vh;
+ margin:  1vh 0;
+ color: #fff;
+ background:#565e93 ;
+ border-radius: 2vh;
+ box-shadow:0 0 1vh #ddd5;
+ border:none;
+ font-size:2vh;
+ user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+}
+#threads {
+ user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+padding: 1vh;
+ margin:  1vh 0;
+ color: #fff;
+ background:#121214 ;
+ border-radius: 2vh;
+ box-shadow:0 0 1vh #ddd5;
+ border:none;
+ font-size:2vh;
+}
+</style>
+</head>
+<body>
+<div id="back">
+
+</div>
+<main id="main"></main>
+<div id="top">上萬人正在預約</div>
+
+
+<footer>
+<a href="https://www.threads.com/@true_jinpigxi" target="_blank"><img src="th.ico" alt="Threads"></a>
+<a href="https://www.instagram.com/true_jinpigxi" target="_blank"><img src="ig.png" alt="Instagram"></a>
+<a href="https://discord.gg/v7U6fRAK" target="_blank"><img src="dc.ico" alt="Discord"></a><a href="https://truexijinpig.github.io/" target="_blank"><img src="phone.svg" alt="打電話"></a>
+<div style="width:90vw;"><p>中國北京市公安處 番號：00008964</p></div>
+</footer>
+
+
+
+<script>
+lh();
+
+let gt=['中國贏麻了','GDP再創新高','器官捐贈天下第一','千秋萬載一桶江湖','先服永享受雨天騎',"我們懷念他","想開心了?","去新疆!","不同意的請舉手","愛我才是愛國","親自部署，親自指揮","通商寬衣，不強自習"];
+for (let i=0;i<100;i++){
+    let nt= parseInt(gt.length*Math.random());
+    let el=dc("p",undefined,gt[nt]);
+    gi("back").appendChild(el);
+    css(el,{left:Math.random()*60+i-30+"vw",top:Math.random()*60+i-30+"vh",transform:`rotateZ(${Math.random()*10-20}deg)`,fontSize:Math.random()*5+"vh"})
+}
+
+setInterval(()=>{
+ 
+ let ra=parseInt(3*Math.random());
+ let ot="";
+ 
+ if (ra==0){
+  let bt=["因排隊糾紛而大打出手","惡意插隊而發生暴動","因搶不到票而大哭","聚在公部門央求額外名額","因排隊太久而暴動","預約成功","正在排隊","透過vpn加速預約","正在公審黃牛","大喊萬歲","爆發搶票革命","爆發近平爭奪戰","導致系統塞住","瘋狂報名導致系統延遲很重","瘋狂報名導致防火長城當機","瘋狂致電爭取優秀順位"];
+  let ct=["廣東省","天津市","上海市","北京市","江蘇省","四川省","江西省","遼寧省","香港","澳門","外交部","內蒙古"];
+  ot=`${ct[parseInt(ct.length*Math.random())]}${parseInt(5*Math.random())*1000+1000}多人${bt[parseInt(bt.length*Math.random())]}`;
+ }else if (ra==1){
+  let wt=["可以打電話詢問","請儘速預約","名額即將搶完","好評持續增加中","免費名額有限","請勿插隊","請勿假冒他人","請勿使用搶票機","請勿開掛","惡意干擾他人報名者，是想開心了嗎？","請輸入暱稱後按下預約","報名成功後別忘了分享","系統嚴重忙線中","別忘了加入Discord"];
+  ot=wt[parseInt(wt.length*Math.random())];
+ }else{
+  let bt=["因過多次報名而暫時停權","在多年前早就報名過了","已報名多次","疑似使用搶票系統","因排隊太久而加入Discord詢問","表示體驗極佳","已成功重複報名","報名成功","疑似使用外掛","正在與習近平見面","表示對於習近平有更多的了解了","致電表示滿意"];
+  let ut=["毛澤東","普京","金正恩","拉赫蒙","配澤西奇揚","鄧小平","金日成","馬克思","恩格斯","吳京","華春瑩","列寧","史大林"];
+  ot=`${ut[parseInt(ut.length*Math.random())]}${bt[parseInt(bt.length*Math.random())]}`
+ }
+ css(gi("top"),{transform:"translate(-50%,-1vh)",opacity:0})
+ st(()=>{
+  css(gi("top"),{transform:"translate(-50%,1vh)",opacity:0})
+ },200);
+ st(()=>{
+  css(gi("top"),{transform:"translate(-50%,0vh)",opacity:1});
+  gi("top").innerText=ot;
+ },400);
+},2000);
+
+
+
+function lh() {
+ gi("main").innerHTML=`<img src="xi.jpg" id="xih" alt="習近平"/>
+<h1>預約習近平一小時</h1><h2>輸入您的姓名</h2><input id="name" placeholder="輸入姓名或暱稱"/><div id="subit">預約</div>`;
+gi("name").addEventListener("input",function () {
+ if (this.value==""){
+  gi("subit").innerHTML="請隨便輸入任何文字";
+  css(gi("subit"),{background: ""});
+ }else{
+  gi("subit").innerHTML="預約";
+  css(gi("subit"),{background: "#6a78ff"});
+ }
+});
+gi("subit").addEventListener("click",function () {
+ if (gi("name").value==""){
+  gi("subit").innerHTML="請隨便輸入任何文字";
+  return;
+ }
+ hf();
+ let wait=parseInt(7*Math.random())+5;
+ gi("main").innerHTML=`<h1>正在排隊取票</h1><h2>約${wait*1000}人正在使用，請耐心等候</h2>`;
+ st(()=>{
+  if (wait==11){
+   gi("main").innerHTML=`<img src="xi.jpg" id="xih" alt="習近平"/>
+<h1>噢不！</h1><h2>系統過度忙線，暫時無法報名</h2><div id="subit" onclick="lh()">重試</div>`;
+   return;
+  }
+  let token=parseInt(Date.now())-parseInt(Date.now()/3600/24/365)*3600*24*365+String(parseInt(500*Math.random()));
+  gi("main").innerHTML=`<img src="xi.jpg" id="xih" alt="習近平"/>
+<h1>預約成功！</h1><h2>入場號：${token}，請保存</h2><a href="https://www.threads.net/intent/post?text=我搶到了！\n預約習近平，入場号：${token}\n\n大發慈悲分享給你：https://truexijinpig.github.io/tic" id="threads">分享到脆作為證明</a>`;
+ tf();
+ },1000*wait);
+})
+}
+
+function hf(){
+    let c=0;
+  for (let i of document.querySelectorAll("footer>*")){
+    st(()=>{css(i,{transform:"translateY(50vh)"});},c*50);
+    c++;
+  }
+
+}
+function tf(){
+    let c=0;
+  for (let i of document.querySelectorAll("footer>*")){
+    st(()=>{css(i,{transform:"translateY(0vh)"});},c*50);
+    c++;
+  }
+
+}
+
+
+function st(f,t){
+    setTimeout(f,t);
+}
+
+
+function css(element, rules){
+ for (let property in rules){
+  if (rules.hasOwnProperty(property)){
+   element.style[property] = rules[property];
+  }
+ }
+}
+function dc(ty,id,tx,ht){
+    let el=document.createElement(ty);
+    el.id=id;
+    el.innerText=tx;
+    if (ht){
+        el.innerHTML=ht;
+    }
+    return el;
+}
+    function gi(i){
+        let el=document.getElementById(i);
+        if (i){
+            i.on=function(l,f){
+                i.addEventListener(l,f);
+            }
+        }else{
+            console.log(i)
+        }
+        return el;
+    }
+</script>
+</body>
+    
+
+
+
+
+
