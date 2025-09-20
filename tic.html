@@ -268,7 +268,7 @@ setInterval(()=>{
  },400);
 },2000);
 
-
+username="";
 
 function lh() {
  gi("main").innerHTML=`<img src="xi.jpg" id="xih" alt="習近平"/>
@@ -287,6 +287,7 @@ gi("subit").addEventListener("click",function () {
   gi("subit").innerHTML="請隨便輸入任何文字";
   return;
  }
+ username=gi("name").value;
  hf();
  let wait=parseInt(7*Math.random())+5;
  gi("main").innerHTML=`<h1>正在排隊取票</h1><h2>約${wait*1000}人正在使用，請耐心等候</h2>`;
@@ -298,7 +299,7 @@ gi("subit").addEventListener("click",function () {
   }
   let token=parseInt(Date.now())-parseInt(Date.now()/3600/24/365)*3600*24*365+String(parseInt(500*Math.random()));
   gi("main").innerHTML=`<img src="xi.jpg" id="xih" alt="習近平"/>
-<h1>預約成功！</h1><h2>入場號：${token}，請保存</h2><a href="https://www.threads.net/intent/post?text=我搶到了！\n預約習近平，入場号：${token}\n\n大發慈悲分享給你：https://truexijinpig.github.io/tic" id="threads">分享到脆作為證明</a>`;
+<h1>預約成功！</h1><h2>入場號：${token}，請保存</h2><a href="https://www.threads.net/intent/post?text=我搶到了！\n預約習近平，入場号：${token}\n @true_jinpigxi 黨員${username}\n\n大發慈悲分享給你：https://truexijinpig.github.io/tic" id="threads">分享到脆作為證明</a>`;
  tf();
  },1000*wait);
 })
