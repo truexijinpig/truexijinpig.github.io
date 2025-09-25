@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+
+<head>
+    <title>與習近平對話</title>
+    <link data-default-icon="xi.jpg" rel="icon"
+        sizes="192x192" href="xi.jpg" />
+    <meta name="bingbot" content="noarchive" />
+    <meta name="robots" content="noarchive, noimageindex" />
+    <meta name="copyright" content="人民網版權所有" />
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta id="viewport" name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, viewport-fit=cover" />
+    <meta name="theme-color" content="#FF0000" />
+    <meta name="theme-color" content="#8c0500" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" sizes="76x76"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="120x120"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="152x152"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="167x167"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="xi.jpg" />
+    <link data-default-icon="xi.jpg" rel="shortcut icon"
+        type="image/x-icon" href="xi.jpg" />
+    <meta property="og:site_name" content="與習近平對話" />
+    <meta property="og:title" content="習近平打電話給你" />
+    <meta property="og:image" content="xi.jpg" />
+    <meta property="fb:app_id" content="124024574287414" />
+    <meta name="description"
+        content="與習近平對話" />
+<meta name="og:description"
+        content="與習近平對話" />
+    <meta name="application-title" content="與習近平對話" />
+    <meta name="color-scheme" content="light" />
+<style>
+    #back{
+        background: -webkit-linear-gradient(50deg , #8c0000 , #350000);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+    }
+    #back>p{
+        color: #fff1;
+        text-wrap: nowrap;
+        position: fixed;
+    }
+h1{
+font-size: 3vh;margin: 1vh;background: linear-gradient(50deg , #ffff00,#ffc700,#fff100) text;color: #0000;
+}
+h2{
+font-size: 2vh; color: #fff180;margin: 1vh;}
+main{
+position: fixed;
+top: 0;
+left: 0;
+display: flex;
+height: 70vh;
+width: 100vw;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+z-index:5;
+}
+#xih{
+border-radius: 9vh;
+height: 20vh;
+width: 20vh;
+animation: xh 0.2s  infinite;
+}
+#hear{
+
+position: fixed;
+top: 60vh;
+left: 50vw;
+height: 5vh;
+width: 5vh;
+padding: 2vh;
+border-radius: 5vh;
+background: #2e3d38;
+animation: ph ease 0.5s infinite;
+cursor: pointer;
+z-index: 5;
+
+}
+
+@keyframes ph{
+    0%{
+        transform: translateX(-55%) rotateZ(-5deg);
+    }
+    50%{
+        transform: translateX(-45%) rotateZ(5deg);
+    }
+    100%{
+        transform: translateX(-55%) rotateZ(-5deg);
+    }
+}
+@keyframes xh{
+    0%{
+        transform: translateY(1px) ;
+    }
+    50%{
+        transform: translateY(-0.5vh) ;
+    }
+    100%{
+        transform: translateY(1px) ;
+    }
+}
+
+footer{
+    top: 70vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    position: fixed;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+footer img{
+    width: 5vh;
+    height: 5vh;
+    border-radius: 5vh;
+    cursor: pointer;
+    margin: 1vh;
+    
+}
+footer>*{
+    transition: all 0.5s ease;
+    text-align:center;
+    font-size:2vh;
+    color:#ddd;
+}
+footer img:hover{
+    box-shadow: 0 0 1vh #fff3;
+}
+#video{
+    width: 80vw;
+    height: 40vw;
+    border-radius: 5vh;
+    background: #0003;
+}
+#start{
+ font-size:2vh;
+ color: #fff;
+ border-radius: 2vh;
+ padding: 1vh;
+ margin: 1vh;
+ animation:sta 5s infinite;
+ border:solid;
+ border-color:#fb0;
+}
+@keyframes sta{
+    0%{
+         background: #ffb200;
+         border-width:0;
+    }
+    50%{
+        background: #0000;
+         border-width:1vh;
+    }
+    100%{
+        background: #ffb200;
+         border-width:0;
+    }
+}
+#down{
+position: fixed;
+top: 80vh;
+left: 0;
+height: 5vh;
+width: 100vw;
+background: linear-gradient(90deg , #fc0,#ff0,#fc0,#ff0,#fc0,#ff0,#fc0,#ff0,#fc0);
+background-size:300vw 5vh ;
+animation:dow 2s infinite;
+cursor:pointer;
+z-index:5;
+}
+@keyframes dow{
+    0%{
+        background-position-x:0;
+        opacity:0.2;
+    }
+    50%{
+        background-position-x:-100vw;
+        opacity:0.5;
+    }
+    100%{
+        background-position-x:-200vw;
+        opacity:0.2;
+    }
+}
+.gblock{
+ position: fixed;
+ padding: 1vh;
+ background: #ffb200a4;
+ border-radius: 4vh;
+ cursor:pointer;
+ font-size:2vh;
+ opacity:0;
+}
+</style>
+</head>
+<body>
+<div id="back">
+
+</div>
+<main id="main"><img src="xi.jpg" id="xih" alt="習近平"/>
+<h1>近平無音音遊</h1><h2>可能有音樂，但不保證能聽</h2></main>
+
+<footer>
+<a href="https://www.threads.com/@real_jinpigxi" target="_blank"><img src="th.ico" alt="Threads"></a>
+<a href="https://www.instagram.com/real_jinpigxi" target="_blank"><img src="ig.png" alt="Instagram"></a>
+<a href="https://discord.gg/QzpD2nwjXR" target="_blank"><img src="dc.ico" alt="Discord"></a><a href="https://truexijinpig.github.io/" target="_blank"><img src="phone.svg" alt="打電話"></a><a href="/tic" style="font-size:3vh ;border-radius: 3vh;background:#ff7300;padding: 1vh;">約</a><div style="width:90vw;"><p>中國北京市公安處 番號：00008964</p></div>
+</footer>
+
+
+<audio id="player" src="ring.mp3" hidden loop></audio>
+<script>
+var video=dc("video","video");
+video.controls="";
+video.src = "movie.mp4";
+video.load();
+lh();
+
+let gt=['中國贏麻了','GDP再創新高','器官捐贈天下第一','千秋萬載一桶江湖','先服永享受雨天騎',"我們懷念他","想開心了?","去新疆!","不同意的請舉手","愛我才是愛國","親自部署，親自指揮","通商寬衣，不強自習","讓你墜樓"];
+for (let i=0;i<100;i++){
+    let nt= parseInt(gt.length*Math.random());
+    let el=dc("p",undefined,gt[nt]);
+    gi("back").appendChild(el);
+    css(el,{left:Math.random()*60-30+i+"vw",top:Math.random()*60+i-30+"vh",transform:`rotateZ(${Math.random()*10-20}deg)`,fontSize:Math.random()*5+"vh"})
+}
+
+var lavel=1,score=0,died=0,ingame,ginter,clicks=[];
+
+function lh() {
+  gi("main").innerHTML=`<img src="xi.jpg" id="xih" alt="習近平"/>
+<h1>近平無音音遊</h1><h2>可能有音樂，但不保證能聽</h2><div id="start">開始遊戲</div>`;
+ gi("start").addEventListener("click",startgame);
+ }
+
+function startgame() {
+ ingame=true;
+ gi("main").innerHTML=`<div id="down"></div>`;
+ hf();
+ died=0;
+ ginter=setInterval(gameloop,20);
+ st(()=>{if (ingame==false){return}clearInterval(ginter);nextGame();},(10+lavel*2)*1000);
+ gi("down").addEventListener("pointerdown",function (e) {
+  let point=parseInt(e.clientX/window.innerWidth*100);
+  clicks.push(point);
+  st(()=>{clicks.splice(0,1)},200);
+  
+ });
+ 
+}
+
+var loopc=0,tx=[];
+function gameloop() {
+  if (!ingame){
+   clearInterval(ginter);
+  }
+  loopc++;
+  if (loopc%parseInt(1+25/lavel)==0){
+   cb();
+  }
+  if (died>Math.max(parseInt(10-lavel/10),1)){
+   clearInterval(ginter);
+   gameOver();
+  }
+}
+
+function cb() {
+ if (!ingame){
+   clearInterval(ginter);
+  }
+ if (tx.length==0){
+  let nt= gt[parseInt(gt.length*Math.random())];
+  for(let i in nt){
+   tx.push(i);
+  }
+ }
+ let t=tx.pop();
+ let b=dc("div",0,t);
+ b.className="gblock";
+ let x=Math.random()-0.5;
+ let y=0;
+ gi("main").appendChild(b);
+ let interid=setInterval(()=>{
+  y+=Math.min(parseInt(1+lavel/10),10);
+  try{
+   css(b,{top:30+y+"vh",left:50+(x*y)+"vw",transform:`scale(${0.5+y/50})`,opacity:1});
+   
+   if (y>40){
+    for (let point of clicks){
+     //console.log(Math.abs(x+50-point));
+     if (Math.abs(x+50-point)<20){
+      clearInterval(interid);
+  gi("main").removeChild(b);
+  score++;
+  return;
+     }
+    }
+   }
+   if (y>80){
+    died++;
+    clearInterval(b.dataset.id);
+    gi("main").removeChild(b);
+   }
+  }catch(e){
+   clearInterval(b.dataset.id);
+  }
+ },20);
+ 
+ b.dataset.id=interid;
+}
+
+
+function nextGame() {
+ ingame=false;
+ gi("main").innerHTML=`<h1>成功通關！</h1><h2>已完成第${lavel++}關，近平興奮指數來到${score}</h2><div id="start">下一關(${lavel})</div>`;
+ gi("start").addEventListener("click",startgame);
+}
+
+function gameOver() {
+ ingame=false;
+ clearInterval(ginter);
+ gi("main").innerHTML=`<h1>嗚嗚嗚，失敗！</h1><h2>已完成第${lavel++}關，近平興奮指數來到${score}</h2><a href="https://www.threads.net/intent/post?text=我成功了！\n近平音遊，第${lavel-1}關，近平興奮度來到：${score}\n\n大發慈悲分享給你：https://truexijinpig.github.io/mg" id="start">分享到脆作為證明</a>`;
+ 
+}
+
+
+
+
+function hf(){
+    let c=0;
+  for (let i of document.querySelectorAll("footer>*")){
+    st(()=>{css(i,{transform:"translateY(50vh)"});},c*50);
+    c++;
+  }
+
+}
+function tf(){
+    let c=0;
+  for (let i of document.querySelectorAll("footer>*")){
+    st(()=>{css(i,{transform:"translateY(0vh)"});},c*50);
+    c++;
+  }
+
+}
+
+
+
+function st(f,t){
+    setTimeout(f,t);
+}
+
+
+function css(element, rules){
+ for (let property in rules){
+  if (rules.hasOwnProperty(property)){
+   element.style[property] = rules[property];
+  }
+ }
+}
+function dc(ty,id,tx,ht){
+    let el=document.createElement(ty);
+    el.id=id;
+    el.innerText=tx;
+    if (ht){
+        el.innerHTML=ht;
+    }
+    return el;
+}
+    function gi(i){
+        let el=document.getElementById(i);
+        if (i){
+            i.on=function(l,f){
+                i.addEventListener(l,f);
+            }
+        }else{
+            console.log(i)
+        }
+        return el;
+    }
+</script>
+</body>
+    
+
+
+
+
+
