@@ -179,7 +179,7 @@ footer img:hover{
 position: fixed;
 top: 80vh;
 left: 0;
-height: 5vh;
+height: 8vh;
 width: 100vw;
 background: linear-gradient(90deg , #fc0,#ff0,#fc0,#ff0,#fc0,#ff0,#fc0,#ff0,#fc0);
 background-size:300vw 5vh ;
@@ -287,11 +287,11 @@ function cb() {
   }
  if (tx.length==0){
   let nt= gt[parseInt(gt.length*Math.random())];
-  for(let i in nt){
+  for(let i of nt){
    tx.push(i);
   }
  }
- let t=tx.pop();
+ let t=tx.splice(0,1);
  let b=dc("div",0,t);
  b.className="gblock";
  let x=Math.random()-0.5;
@@ -300,7 +300,7 @@ function cb() {
  let interid=setInterval(()=>{
   y+=Math.min(parseInt(1+lavel/10),10);
   try{
-   css(b,{top:30+y+"vh",left:50+(x*y)+"vw",transform:`scale(${0.5+y/50})`,opacity:1});
+   css(b,{top:30+y+"vh",left:50+(x*y*2)+"vw",transform:`scale(${0.5+y**2/1000})`,opacity:1});
    
    if (y>40){
     for (let point of clicks){
