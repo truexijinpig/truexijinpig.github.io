@@ -72,6 +72,7 @@ width: 100vw;
 user-select: none;
 -webkit-user-drag: none;
 -webkit-user-select: none;
+touch-action:none;
 z-index:5;
 }
 #xih{
@@ -177,7 +178,7 @@ footer img:hover{
 }
 #down{
 position: fixed;
-top: 80vh;
+top: 70vh;
 left: 0;
 height: 8vh;
 width: 100vw;
@@ -205,10 +206,33 @@ z-index:5;
  position: fixed;
  padding: 1vh;
  background: #ffb200a4;
- border-radius: 4vh;
+ border-radius: 0vh;
  cursor:pointer;
  font-size:2vh;
  opacity:0;
+}
+.pointer{
+ position: fixed;
+ top:71.5vh;
+ border-radius: 1vh;
+ z-index:8;
+ transition:top 0.2s ease-in,left 0.2s ease,width 0.2s ease-in,height 0.2s ease-in,box-shadow 0.2s linear,transform 0.2s ease,border-radius 0.2s ease;
+ user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+touch-action:none;
+}
+#score{
+position: fixed;
+top:1vh;
+right:0vh;
+  display:flex;
+    flex-direction: column;
+}
+#score p{
+ font-size:2vh;
+ margin:1vh;
+ color: #b1a067;
 }
 </style>
 </head>
@@ -234,7 +258,7 @@ video.src = "movie.mp4";
 video.load();
 lh();
 
-let gt=['中國贏麻了','GDP再創新高','器官捐贈天下第一','千秋萬載一桶江湖','先服永享受雨天騎',"我們懷念他","想開心了?","去新疆!","不同意的請舉手","愛我才是愛國","親自部署，親自指揮","通商寬衣，不強自習","讓你墜樓"];
+let gt=['中國贏麻了','GDP再創新高','器官捐贈天下第一','千秋萬載一桶江湖','先服永享受雨天騎',"我們懷念他","想開心了?","去新疆!","不同意的請舉手","愛我才是愛國","親自部署，親自指揮","通商寬衣，不強自習","讓你墜樓","只有我才是真消息","新疆要鎮壓","香港要打","打人民就是打江山，維護社會","老人瞻仰精甚細膩","薩格爾王金科律玉"];
 for (let i=0;i<100;i++){
     let nt= parseInt(gt.length*Math.random());
     let el=dc("p",undefined,gt[nt]);
@@ -242,7 +266,7 @@ for (let i=0;i<100;i++){
     css(el,{left:Math.random()*60-30+i+"vw",top:Math.random()*60+i-30+"vh",transform:`rotateZ(${Math.random()*10-20}deg)`,fontSize:Math.random()*5+"vh"})
 }
 
-var lavel=1,score=0,died=0,ingame,ginter,clicks=[];
+var lavel=1,score=0,died=0,ingame,ginter,clicks=[],now_score,now_lost;
 
 function lh() {
   gi("main").innerHTML=`<img src="xi.jpg" id="xih" alt="習近平"/>
@@ -252,17 +276,33 @@ function lh() {
 
 function startgame() {
  ingame=true;
- gi("main").innerHTML=`<div id="down"></div>`;
+ gi("main").innerHTML=`<div id="score"></div><div id="down"></div>`;
  hf();
  died=0;
+ now_score=0;
+ now_lost=0;
  ginter=setInterval(gameloop,20);
- st(()=>{if (ingame==false){return}clearInterval(ginter);nextGame();},(10+lavel*2)*1000);
+ st(()=>{if (ingame==false){return}clearInterval(ginter);nextGame();},(5+lavel*2)*1000);
  gi("down").addEventListener("pointerdown",function (e) {
   let point=parseInt(e.clientX/window.innerWidth*100);
   clicks.push(point);
   st(()=>{clicks.splice(0,1)},200);
-  
+  cp(e.clientX)
  });
+ 
+}
+function cp(dx) {
+ let el=dc("div",0,"");
+ 
+ el.className="pointer";
+  css(el,{left:dx-0.025*window.innerHeight+"px",boxShadow:"0 0 1vh 1vh #f004",width:"5vh",height:"5vh",transform:"rotateZ(-45deg)"});
+  gi("main").appendChild(el);
+  setTimeout(()=>{css(el,{top:"69vh",left:dx-0.1*window.innerWidth+"px",height:"10vh",width:"20vw",boxShadow: "0 0 3vh #ffe715",transform:"rotateZ(0deg)",borderRadius:"5vh",background:"#f304"});},100);
+  setTimeout(()=>{
+  try{
+   gi("main").removeChild(el);
+  }catch(e){}
+  },300);
  
 }
 
@@ -271,11 +311,12 @@ function gameloop() {
   if (!ingame){
    clearInterval(ginter);
   }
+  gi("score").innerHTML=`<P>命中:${now_score}</P><P>失誤:${now_lost}</P>`;
   loopc++;
-  if (loopc%parseInt(1+25/lavel)==0){
+  if (loopc%parseInt(1+40/lavel)==0){
    cb();
   }
-  if (died>Math.max(parseInt(10-lavel/10),1)){
+  if (died>Math.max(parseInt(10-lavel/20),3)){
    clearInterval(ginter);
    gameOver();
   }
@@ -298,25 +339,31 @@ function cb() {
  let y=0;
  gi("main").appendChild(b);
  let interid=setInterval(()=>{
-  y+=Math.min(parseInt(1+lavel/10),10);
+  y+=Math.min(parseInt(1+lavel/40),10);
   try{
    css(b,{top:30+y+"vh",left:50+(x*y*2)+"vw",transform:`scale(${0.5+y**2/1000})`,opacity:1});
    
-   if (y>40){
+   if (y>35){
+   
     for (let point of clicks){
      //console.log(Math.abs(x+50-point));
-     if (Math.abs(x+50-point)<20){
+     if (Math.abs(x+55-point)<15){
       clearInterval(interid);
   gi("main").removeChild(b);
   score++;
+  now_score++;
   return;
      }
     }
    }
-   if (y>80){
+   if(y>50){
+    css(b,{background:"#fff100"});
+   }
+   if (y>90){
     died++;
     clearInterval(b.dataset.id);
     gi("main").removeChild(b);
+    now_lost++;
    }
   }catch(e){
    clearInterval(b.dataset.id);
@@ -329,15 +376,15 @@ function cb() {
 
 function nextGame() {
  ingame=false;
- gi("main").innerHTML=`<h1>成功通關！</h1><h2>已完成第${lavel++}關，近平興奮指數來到${score}</h2><div id="start">下一關(${lavel})</div>`;
+ gi("main").innerHTML=`<img src="xi.jpg" id="xih" alt="習近平"/><h1>成功通關！</h1><h2>已完成第${lavel++}關，近平興奮指數來到${score}</h2><h2>命中率:${parseInt(1000*now_score/(now_lost+now_score))/10}%</h2><div id="start">下一關(${lavel})</div>`;
  gi("start").addEventListener("click",startgame);
 }
 
 function gameOver() {
  ingame=false;
  clearInterval(ginter);
- gi("main").innerHTML=`<h1>嗚嗚嗚，失敗！</h1><h2>已完成第${lavel++}關，近平興奮指數來到${score}</h2><a href="https://www.threads.net/intent/post?text=我成功了！\n近平音遊，第${lavel-1}關，近平興奮度來到：${score}\n\n大發慈悲分享給你：https://truexijinpig.github.io/mg" id="start">分享到脆作為證明</a>`;
- 
+ gi("main").innerHTML=`<img src="xi.jpg" id="xih" alt="習近平"/><h1>嗚嗚嗚，失敗！</h1><h2>已完成第${lavel++}關，近平興奮指數來到${score}</h2><a href="https://www.threads.net/intent/post?text=我成功了！\n近平音遊，第${lavel-1}關，讓近平興奮度來到：${score}！\n\n大發慈悲分享給你：https://truexijinpig.github.io/mg" id="start">分享到脆作為證明</a>`;
+ tf();
 }
 
 
