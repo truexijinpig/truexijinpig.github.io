@@ -431,8 +431,8 @@ function setStampBureau(text){
     const y=cy+radius*Math.sin(ang);
     const s=document.createElement("span");
     s.textContent=ch;
-    s.style.left=x+"px";
-    s.style.top=y+"px";
+    s.style.left=x/20+"vh";
+    s.style.top=y/20+"vh";
     s.style.transform=`translate(-50%,-50%) rotate(${ang+Math.PI/2}rad)`;
     circle.appendChild(s);
   });
@@ -532,14 +532,16 @@ document.getElementById("btnGenerate").addEventListener("click",()=>{
 document.getElementById("btnDownload").addEventListener("click",()=>{
   const poster=document.getElementById("poster");
   const isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const scale=isMobile?1:2;
+  const scale=isMobile?6:12;
 
   html2canvas(poster,{
     scale, useCORS:true, allowTaint:true,
     width:poster.clientWidth,
     height:poster.clientHeight
   }).then(canvas=>{
+    
     const dataUrl=canvas.toDataURL("image/png");
+    
 
     if(isMobile){
       const w=window.open();
@@ -550,14 +552,14 @@ document.getElementById("btnDownload").addEventListener("click",()=>{
       } else {
         window.location.href=dataUrl;
       }
-    }else{
+    }
       const a=document.createElement("a");
       a.href=dataUrl;
       a.download=`reward_${Date.now()}.png`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-    }
+    
   });
 });
 
