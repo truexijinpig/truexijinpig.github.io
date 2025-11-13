@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>懸賞通告產生器</title>
+<link data-default-icon="xi.jpg" rel="icon"
+        sizes="192x192" href="xi.jpg" />
+    <meta name="bingbot" content="noarchive" />
+    <meta name="robots" content="noarchive, noimageindex" />
+    <meta name="copyright" content="https://github.com/EDUtw2016" />
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta id="viewport" name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, viewport-fit=cover" />
+    <meta name="theme-color" content="#FF0000" />
+    <meta name="theme-color" content="#8c0500" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" sizes="76x76"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="120x120"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="152x152"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="167x167"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="xi.jpg" />
+    <link data-default-icon="xi.jpg" rel="shortcut icon"
+        type="image/x-icon" href="xi.jpg" />
+    <meta property="og:site_name" content="與習近平對話" />
+    <meta property="og:title" content="懸賞通告生成器" />
+    <meta property="og:image" content="xi.jpg" />
+    <meta property="fb:app_id" content="124024574287414" />
+    <meta name="description"
+        content="生成懸賞通告 原 https://github.com/EDUtw2016/china.reward" />
+<meta name="og:description"
+        content="生成懸賞通告 原 https://github.com/EDUtw2016/china.reward" />
+    <meta name="application-title" content="懸賞通告生成器" />
+    <meta name="color-scheme" content="light" />
+<style>
+/*{box-sizing:border-box}*/
+a{ background:#383;
+padding: 1px;border-radius: 5px;color: #fff;
+}
+body{
+  margin:0;padding:20px;
+  background:#f0f2f5;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;
+  display:flex;gap:20px;
+}
+.panel{
+  position:fixed;
+  z-index:1;
+  width:30vh;
+  background:#fff;border-radius:12px;
+  padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  transition:all 0.2s ease-in-out;
+  overflow-y:scroll;display:flex;
+flex-direction: column;
+    align-items: center;
+}
+.panel h2{margin:0 0 1vh;}
+panel p{
+ margin:0.2vh;
+}
+.form-group{margin:0.5vh;}
+.form-group label{font-size:14px;display:block}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:6px 8px;font-size:14px;
+  border:1px solid #d0d4da;border-radius:6px;box-shadow:0 0 0.5vh #ddd5;
+}
+textarea{resize:vertical;min-height:60px}
+
+.button-row{display:flex;gap:0.5vh}
+button{
+  padding:8px 14px;border-radius:999px;border:none;
+  background:#2563eb;color:#fff;cursor:pointer;font-size:14px;
+}
+#btnDownload{background:#059669}
+
+.poster-wrapper{flex:1;display:flex;justify-content:center}
+.poster{
+  width:30vh;background:#fff;border:1px solid #d0d4da;background:#e5f2ff;
+  border-radius:0.4vh;overflow:hidden;position:relative;
+}
+
+/* Header */
+.poster-header{
+  background:#0046a5;color:#fff;display:flex;
+  align-items:center;gap:8vh;padding:0.5vh 1vh;
+}
+.badge{width:3.6vh;height:3.6vh}
+.badge img{width:100%;height:100%;object-fit:contain}
+.poster-title{font-size:1.6vh;font-weight:700;letter-spacing:0.4vh;}
+
+/* Photo section */
+.photo-strip{
+  background:#e5f2ff;padding:1.2vh 1.5vh 1.6vh;
+}
+.photo-frame{
+  width:9vh ; height:11vh;margin:0 auto 0.5vh;
+  border:1px solid #9ca3af;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.photo-frame img{
+  width:100%;height:100%;object-fit:cover
+}
+.name-line{
+  font-size:1vh;font-weight:600;letter-spacing:0.2vh;text-align:center;
+}
+.id-line{text-align:center;font-size:0.75vh;color:#374151}
+
+/*.divider{height:0.05vh;background:#f00}*/
+
+/* Crime section */
+.crime-section{
+  margin:1vh;
+  padding:1vh 1.5vh 5vh;
+  font-size:0.75vh;line-height:1vh;text-align:text-start;background:#fff;
+  border:1px solid #ddd;
+}
+
+/* blue bar */
+.phone-bar{
+  position:absolute;left:1.8vh;bottom:1.8vh;
+  background:#003b8f;color:#fff;font-size:0.75vh;
+  padding:0.3vh; 14px;border-radius:0.2vh;display:flex;gap:0.4vh;
+}
+.phone-icon{
+  width:1vh;height:1vh;border-radius:50%;
+  border:1px solid #fff;display:flex;align-items:center;justify-content:center;
+  font-size:0.55vh;
+}
+
+/* Stamp */
+.stamp{
+  position:absolute;right:2vh;bottom:3vh;
+  width:7.5vh;height:7.5vh;border-radius:50%;
+  border:0.2vh solid #ef4444;color:#ef4444;
+  transform:rotate(-12deg);pointer-events:none;
+}
+.stamp-star{
+  position:absolute;top:38%;left:50%;
+  transform:translate(-50%,-50%);
+  font-size:3vh;line-height:1;
+}
+.stamp-circle{
+  position:absolute;top:50%;left:50%;
+  width:6vh;height:6vh;transform:translate(-50%,-50%);
+}
+.stamp-circle span{
+  position:absolute;font-size:0.75vh;font-weight:700;color:#ef4444;
+}
+.stamp-date{
+  position:absolute;bottom:0.9vh;left:50%;
+  transform:translateX(-50%);font-size:0.6vh;color:#ef4444;
+}
+
+.emphasis{font-weight:700;text-decoration:underline}
+#opcp{
+ font-size:1vh;
+ background: #fff;
+ padding: 1vh;
+ position: fixed;
+ top: 10vh;
+ left: 0vh;
+ z-index:2;
+ border-radius: 3vh;
+ box-shadow:0 0 1vh #2224;
+}
+</style>
+</head>
+<body>
+<div id="opcp">開關編輯台</div>
+<div class="panel">
+  <h2>懸賞通告產生器</h2>
+  <p>改編自<a href="https://github.com/EDUtw2016" traget="_blank">EDUtw2016</a>的作品<a href="https://github.com/EDUtw2016/china.reward" target="_blank">懸賞通告</a>萬分感謝🙏</p>
+  <div class="form-group">
+    <label>姓名</label>
+    <input id="inputName" type="text">
+  </div>
+
+  <div class="form-group">
+    <label>性別</label>
+    <select id="inputGender">
+      <option value="男">男</option>
+      <option value="女">女</option>
+      <option value="其他">其他</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>戶籍地（決定身分證字首）</label>
+    <select id="inputHousehold">
+      <option value="">隨機</option>
+      <option value="A">台北市</option>
+      <option value="F">新北市</option>
+      <option value="B">台中市</option>
+      <option value="D">台南市</option>
+      <option value="E">高雄市</option>
+      <option value="C">基隆市</option>
+      <option value="H">桃園市</option>
+      <option value="I">嘉義市</option>
+      <option value="O">新竹市</option>
+      <option value="G">宜蘭縣</option>
+      <option value="J">新竹縣</option>
+      <option value="K">苗栗縣</option>
+      <option value="L">台中縣</option>
+      <option value="M">南投縣</option>
+      <option value="N">彰化縣</option>
+      <option value="P">雲林縣</option>
+      <option value="Q">嘉義縣</option>
+      <option value="R">台南縣</option>
+      <option value="S">高雄縣</option>
+      <option value="T">屏東縣</option>
+      <option value="U">花蓮縣</option>
+      <option value="V">台東縣</option>
+      <option value="X">澎湖縣</option>
+      <option value="W">金門縣</option>
+      <option value="Z">連江縣</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>身份描述</label>
+    <input id="inputIdentity" type="text">
+  </div>
+
+  <div class="form-group">
+    <label>懸賞金額（自由輸入：1.5萬 / 200元 / 3万人民币）</label>
+    <div style="display:flex;gap:6px">
+      <input id="inputRewardMin" type="text" placeholder="最低">
+      <span>至</span>
+      <input id="inputRewardMax" type="text" placeholder="最高">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>犯罪事由（50字內）</label>
+    <textarea id="inputReason">器官搶劫、洗錢、殺害藝人、違反中華民國憲法……</textarea>
+  </div>
+
+  <div class="form-group">
+    <label>上傳照片</label>
+    <input id="inputPhoto" type="file" accept="image/*">
+  </div>
+
+  <div class="button-row">
+    <button id="btnGenerate">生成</button>
+    <button id="btnDownload">下載PNG</button>
+  </div>
+  <div class="form-group">
+  <h3>生成文本預覽</h3>
+  <p>能更自由的修改</p>
+  <textarea id="previewtxt" style="min-height:40vh;"></textarea>
+  </div>
+  <a href="https://discord.gg/QzpD2nwjXR" target="_blank"><img src="dc.ico" alt="Discord"></a><a href="/" style="font-size:3vh ;border-radius: 3vh;background: #8098ff;padding: 1vh;">給主席打電話</a>
+  <a href="/mg" style="font-size:2vh ;border-radius: 3vh;background: #d50;padding: 1vh 2vh;">近平音遊</a>
+</div>
+
+<div class="poster-wrapper">
+<div class="poster" id="poster">
+  <div class="poster-header">
+    <div class="badge"><img src="badge.png"></div>
+    <div class="poster-title">悬赏通告</div>
+  </div>
+
+  <div class="photo-strip">
+    <div class="photo-frame">
+      <img id="photoPreview">
+    </div>
+    <div class="name-line">
+      <span id="posterName">某某</span>
+      <span id="posterGender">男</span>
+    </div>
+    <div class="id-line">中国台湾省身份证号码 <span id="posterId">A123456789</span></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="crime-section">
+    <div id="crimeText">（犯罪段落將在此呈現）</div>
+    <div style="text-align:right;margin-top:20px" id="issuerText">
+      某某市公安局　2025年1月1日
+    </div>
+  </div>
+
+  <div class="phone-bar">
+    <div class="phone-icon">☎</div> 举报电话：请广大群众积极提供线索
+  </div>
+
+  <div class="stamp">
+    <div class="stamp-star">★</div>
+    <div class="stamp-circle" id="stampCircle"></div>
+    <div class="stamp-date" id="stampDate">2025年1月1日</div>
+  </div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script>
+ 
+/*工作台開關*/
+var paneloc=false;
+openandcl();
+xi("opcp").addEventListener("click",openandcl);
+function openandcl() {
+
+ this.innerText=(paneloc?"開啟":"隱藏")+"編輯區";
+ if (paneloc){
+  css(qq(".panel")[0],{top:"150vh"});
+ }else{
+  if (window.innerHeight>window.innerWidth){
+   css(qq(".panel")[0],{top:"50vh",height:"50vh",width:"90vw"});
+  }else{
+   css(qq(".panel")[0],{top:"1vh",height:"90vh",width:"30vh"});
+  }
+ }
+ paneloc=!paneloc;
+}
+function css(element, rules){
+ for (let property in rules){
+  if (rules.hasOwnProperty(property)){
+   element.style[property] = rules[property];
+  }
+ }
+}
+function xi(t) {
+ return document.getElementById(t);
+}
+function qq(t) {
+ return document.querySelectorAll(t)
+}
+
+xi("previewtxt").addEventListener("input",function () {
+ xi("crimeText").innerHTML= escapeHtml(this.value).replaceAll(/__(.*?)__/gim, '<span class="emphasis">$1</span>');
+})
+/* ============================================================
+   0. 輕量繁→簡轉換（必要字都足夠，需擴充我也能加）
+============================================================ */
+const tradToSimpMap = {
+  "臺":"台","灣":"湾","們":"们","會":"会","體":"体","為":"为","開":"开","關":"关",
+  "與":"与","無":"无","這":"这","說":"说","學":"学","經":"经","選":"选","國":"国",
+  "長":"长","時":"时","後":"后","裡":"里","裏":"里","話":"话","讀":"读","區":"区",
+  "實":"实","報":"报","極":"极","務":"务","廣":"广","發":"发","體":"体","醫":"医",
+  "證":"证","據":"据","線":"线","優":"优","號":"号","風":"风","帶":"带","愛":"爱",
+  "門":"门","頂":"顶","辦":"办","處":"处","關":"关"
+};
+function toSimplified(str){
+  return str.replace(/[\u4e00-\u9fa5]/g,ch=>tradToSimpMap[ch]||ch);
+}
+
+/* ============================================================
+   1. 身分證字首 mapping
+============================================================ */
+const idMapping = {
+  A:10,B:11,C:12,D:13,E:14,F:15,G:16,H:17,J:18,K:19,
+  L:20,M:21,N:22,P:23,Q:24,R:25,S:26,T:27,U:28,V:29,
+  X:30,Y:31,W:32,Z:33,I:34,O:35
+};
+const letterList = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
+
+/* ============================================================
+   2. 產生偽身分證（格式正確、校驗錯誤）
+============================================================ */
+function generateFakeTaiwanId(gender, area){
+  let letter = area || letterList[Math.floor(Math.random()*letterList.length)];
+  const genderDigit = (gender==="女") ? 2 : 1;
+
+  const nums = [genderDigit];
+  for(let i=0;i<7;i++) nums.push(Math.floor(Math.random()*10));
+  nums.push(Math.floor(Math.random()*10));
+
+  const code=idMapping[letter];
+  const c1=Math.floor(code/10), c2=code%10;
+
+  const all=[c1,c2].concat(nums);
+  let sum=all[0] + all[1]*9;
+  let w=8;
+  for(let i=2;i<all.length;i++,w--) sum+=all[i]*w;
+
+  if(sum%10===0) nums[8]=(nums[8]+1)%10;
+
+  return letter + nums.join("");
+}
+
+/* ============================================================
+   3. 全形金額處理
+============================================================ */
+function normalizeAmountStr(str){
+  if(!str) return "";
+  return toSimplified(str.replace(/\s+/g,""));
+}
+
+function buildRewardDisplay(minInput,maxInput){
+  let min=normalizeAmountStr(minInput);
+  let max=normalizeAmountStr(maxInput);
+
+  if(!min && !max) return "5万至10万元人民币";
+  if(!min) return max;
+  if(!max) return min;
+
+  const bothYuan = min.endsWith("元") && max.endsWith("元");
+  if(bothYuan){
+    return min.slice(0,-1) + "至" + max;
+  }
+
+  const bothWan = /万$/.test(min) && /万$/.test(max);
+  if(bothWan){
+    return `${min}至${max}元`;
+  }
+
+  return `${min}至${max}`;
+}
+
+/* ============================================================
+   4. 紅色印章環形文字
+============================================================ */
+function setStampBureau(text){
+  const circle=document.getElementById("stampCircle");
+  circle.innerHTML="";
+  const chars=text.split("");
+  const radius=58, cx=60, cy=60;
+  const start=-Math.PI*0.9, end=-Math.PI*0.1;
+  const step=(chars.length>1)?(end-start)/(chars.length-1):0;
+
+  chars.forEach((ch,i)=>{
+    const ang=start+step*i;
+    const x=cx+radius*Math.cos(ang);
+    const y=cy+radius*Math.sin(ang);
+    const s=document.createElement("span");
+    s.textContent=ch;
+    s.style.left=x+"px";
+    s.style.top=y+"px";
+    s.style.transform=`translate(-50%,-50%) rotate(${ang+Math.PI/2}rad)`;
+    circle.appendChild(s);
+  });
+}
+
+/* ============================================================
+   5. 犯罪段落
+============================================================ */
+function escapeHtml(str){
+  return str.replace(/[&<>"]/g, ch => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[ch]));
+}
+
+function generateCrimeText(name, identity, reason, reward){
+  let emName    = `<span class="emphasis">${escapeHtml(name)}</span>`;
+  let emId      = `<span class="emphasis">${escapeHtml(identity)}</span>`;
+  let emReason  = `<span class="emphasis">${escapeHtml(reason)}</span>`;
+  let emReward  = escapeHtml(reward);
+
+  return (
+    `我局工作掌握，${emName}，${emId}，${emReason}，` +
+    `长期利用其身份在境外社交平台发布、传播涉台涉政不实信息，` +
+    `恶意攻击抹黑国家和政府形象，煽动部分不明真相群众产生敌对情绪，` +
+    `多次与境内外分裂势力勾连串联，从事损害国家统一和社会稳定的活动，` +
+    `造成恶劣社会影响。其行为已触犯《中华人民共和国刑法》第一百零三条之规定，涉嫌煽动分裂国家罪。` +
+    `为依法严厉打击破坏国家主权和领土完整的犯罪行为，切实维护国家安全，请广大群众积极提供线索，` +
+    `凡向公安机关提供有效线索的举报人，以及配合公安机关抓获相关犯罪嫌疑人的有功人员，` +
+    `我局将视情给予${emReward}的奖励。` +
+    `对包庇在逃人员的，将依法追究法律责任。对打击报复举报人的，将依法严惩。`
+  );
+}
+
+/* ============================================================
+   6. 日期
+============================================================ */
+function formatCNDate(date=new Date()){
+  return `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`;
+}
+
+/* ============================================================
+   7. 實作 DOM
+============================================================ */
+const bureaus=[
+  "北京市公安局","上海市公安局","廣州市公安局","深圳市公安局","杭州市公安局",
+  "南京市公安局","成都市公安局","重慶市公安局","武漢市公安局","西安市公安局",
+  "福州市公安局","廈門市公安局","青島市公安局","蘇州市公安局"
+];
+
+/* --- 照片預覽 --- */
+document.getElementById("inputPhoto").addEventListener("change",e=>{
+  const f=e.target.files[0];
+  const img=document.getElementById("photoPreview");
+  if(!f){ img.src=""; return; }
+  const r=new FileReader();
+  r.onload=ev=>img.src=ev.target.result;
+  r.readAsDataURL(f);
+});
+
+/* --- 生成按鈕 --- */
+document.getElementById("btnGenerate").addEventListener("click",()=>{
+  let name  = toSimplified(document.getElementById("inputName").value.trim()||"某某");
+  let gender= document.getElementById("inputGender").value;
+  let area  = document.getElementById("inputHousehold").value || "";
+
+  let identity = toSimplified(document.getElementById("inputIdentity").value.trim()||"台湾居民");
+  let reason   = toSimplified(document.getElementById("inputReason").value.trim()||"长期在境外社交平台发布涉政言论");
+
+  let rMinRaw = toSimplified(document.getElementById("inputRewardMin").value.trim());
+  let rMaxRaw = toSimplified(document.getElementById("inputRewardMax").value.trim());
+  let reward  = buildRewardDisplay(rMinRaw,rMaxRaw);
+
+  /* 更新姓名、性別、身份證 */
+  document.getElementById("posterName").textContent=name;
+  document.getElementById("posterGender").textContent=gender;
+
+  let fakeId = generateFakeTaiwanId(gender,area);
+  document.getElementById("posterId").textContent=fakeId;
+
+  /* 犯罪段落 */
+  let gent= generateCrimeText(name,identity,reason,reward);
+  xi("previewtxt").value=gent.replaceAll(`<span class="emphasis">`,"__").replaceAll("</span>","__");
+  document.getElementById("crimeText").innerHTML = gent
+    
+
+  /* 公安局 + 日期 */
+  let bureau=bureaus[Math.floor(Math.random()*bureaus.length)];
+  let dateStr=formatCNDate();
+
+  setStampBureau(bureau);
+  document.getElementById("stampDate").textContent=dateStr;
+  document.getElementById("issuerText").innerHTML =
+    `${bureau}　${dateStr}`;
+});
+
+/* ============================================================
+   8. 下載 PNG（手機不閃退）
+============================================================ */
+document.getElementById("btnDownload").addEventListener("click",()=>{
+  const poster=document.getElementById("poster");
+  const isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const scale=isMobile?1:2;
+
+  html2canvas(poster,{
+    scale, useCORS:true, allowTaint:true,
+    width:poster.clientWidth,
+    height:poster.clientHeight
+  }).then(canvas=>{
+    const dataUrl=canvas.toDataURL("image/png");
+
+    if(isMobile){
+      const w=window.open();
+      if(w){
+        w.document.title="懸賞通告";
+        w.document.body.style.margin="0";
+        w.document.body.innerHTML=`<img src="${dataUrl}" style="width:100%;display:block">`;
+      } else {
+        window.location.href=dataUrl;
+      }
+    }else{
+      const a=document.createElement("a");
+      a.href=dataUrl;
+      a.download=`reward_${Date.now()}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  });
+});
+
+/* 初始自動生成一次 */
+document.getElementById("btnGenerate").click();
+</script>
+
+</body>
+</html>
