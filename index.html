@@ -50,15 +50,19 @@
 -webkit-user-select: none;
     }
     #back>p{
-        color: #fff2;
+        color: #fff1;
         text-wrap: nowrap;
         position: fixed;
     }
+body{
+ touch-action:none;
+}
 h1{
-font-size: 5vh;margin: 1vh;background: linear-gradient(50deg , #ff0000,#fff) text;color: #0000;
+font-size: 5vh;margin: 1vh;background: linear-gradient(50deg , #ff1010,#ff0) text;color: #0000;
+text-shadow:0 -1vh 1vh #ff05,1vh 0 1vh #f055;
 }
 h2{
-font-size: 3vh; color: aquamarine;margin: 1vh;}
+font-size: 3vh; color: #ff9;margin: 0.5vh;}
 main{
 position: fixed;
 top: 0;
@@ -72,6 +76,7 @@ width: 100vw;
 user-select: none;
 -webkit-user-drag: none;
 -webkit-user-select: none;
+
 }
 #xih{
 border-radius: 9vh;
@@ -79,31 +84,41 @@ height: 20vh;
 width: 20vh;
 animation: xh 0.2s  infinite;
 }
-#hear{
+#hears{
+ position: fixed;
+top: 55vh;
+left: calc(50vw - 22vh);
+height:14vh;
+display:flex;
+align-items:center;
+justify-content:center;
+width:44vh;
+flex-wrap:wrap;
+z-index:6;
+}
+.hear{
 
-position: fixed;
-top: 60vh;
-left: 50vw;
+
 height: 5vh;
 width: 5vh;
 padding: 2vh;
 border-radius: 5vh;
-background: #2e3d38;
+background: #654;
 animation: ph ease 0.5s infinite;
 cursor: pointer;
 z-index: 5;
-
+margin:1vh;
 }
 
 @keyframes ph{
     0%{
-        transform: translateX(-55%) rotateZ(-5deg);
+        transform: translateX(-5%) rotateZ(-5deg);
     }
     50%{
-        transform: translateX(-45%) rotateZ(5deg);
+        transform: translateX(5%) rotateZ(5deg);
     }
     100%{
-        transform: translateX(-55%) rotateZ(-5deg);
+        transform: translateX(-5%) rotateZ(-5deg);
     }
 }
 @keyframes xh{
@@ -150,13 +165,41 @@ footer img:hover{
     border-radius: 5vh;
     background: #0003;
 }
+#overhead{
+ background: #2229;
+ position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        user-select: none;
+        display:flex;
+align-items:center;
+justify-content:center;
+backdrop-filter:blur(2vh);
+ -webkit-backdrop-filter:blur(2vh);
+-webkit-user-drag: none;
+-webkit-user-select: none;
+touch-action:none;
+z-index:10;
+}
+#overhead>p{
+color: #ff0;
+ text-shadow:0 0 1vh #999 , 0 1vh 1px #995;
+}
 </style>
 </head>
 <body>
 <div id="back">
 
 </div>
-<img src="phone.svg" alt="接聽" id="hear">
+<div id="hears">
+ <img src="phone.svg" alt="接聽" class="hear">
+<img src="phone.svg" alt="接聽" class="hear">
+<img src="phone.svg" alt="接聽" class="hear">
+<img src="phone.svg" alt="接聽" class="hear">
+
+</div>
 <main id="main"><img src="xi.jpg" id="xih" alt="習近平"/>
 <h1>習近平</h1><h2>打電話給你</h2></main>
 
@@ -166,7 +209,7 @@ footer img:hover{
 <a href="https://discord.gg/QzpD2nwjXR" target="_blank"><img src="dc.ico" alt="Discord"></a><a href="/tic" style="font-size:3vh ;border-radius: 3vh;background: #8098ff;padding: 1vh;">約</a><div style="width:90vw;"><p>中國北京市公安處 番號：00008964</p></div>
 <a href="/mg" style="font-size:2vh ;border-radius: 3vh;background: #d50;padding: 1vh 2vh;">近平音遊</a>
 </footer>
-
+<div id="overhead"><p>點擊來開始</p></div>
 
 <audio id="player" src="ring.mp3" hidden loop></audio>
 <script>
@@ -180,13 +223,16 @@ for (let i=0;i<100;i++){
     let nt= parseInt(gt.length*Math.random());
     let el=dc("p",undefined,gt[nt]);
     gi("back").appendChild(el);
-    css(el,{left:Math.random()*60-30+i+"vw",top:Math.random()*60+i-30+"vh",transform:`rotateZ(${Math.random()*10-20}deg)`,fontSize:Math.random()*5+"vh"})
+    css(el,{left:(i%2)*30-30+i+"vw",top:Math.random()*60+i-30+"vh",transform:`rotateZ(${Math.random()*10-20}deg)`,fontSize:Math.random()*5+"vh"})
 }
 
 /*window.onload=()=>{};*/
 var playedd=false;
 const player = document.getElementById("player");
-document.onclick=()=>{if (playedd==false){playAudio();playedd=1}};
+gi("overhead").onclick=()=>{
+if (playedd==false){playAudio();playedd=1}
+css(gi("overhead"),{display:"none"});
+};
 function playAudio() {
     player.volume=1;
     player.play();
@@ -196,17 +242,22 @@ function pauseAudio() {
       player.pause();
 }
 
-gi("hear").addEventListener("click",()=>{
+Array.from(document.querySelectorAll(".hear")).forEach(el=>{
+el.addEventListener("click",function
+ 
+(){
+    
     css(gi("back"),{background:"-webkit-linear-gradient(50deg , #220000 , #110000)"});
     gi("main").innerText=``;
     gi("main").appendChild(video);
     video.volume=1;
     video.play();
-    css(gi("hear"),{display:"none"});
+    css(gi("hears"),{display:"none"});
     hf();
     pauseAudio();
 });
 
+});
 video.addEventListener("ended", () => {
 gi("main").innerHTML=`<img src="xi.jpg" id="xih" alt="習近平"/><h1>系統已判定你是反華份子!</h1><h2>你已被習近平封鎖!</h2>`;
 st(()=>{
