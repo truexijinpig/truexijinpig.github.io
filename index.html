@@ -97,8 +97,6 @@ flex-wrap:wrap;
 z-index:6;
 }
 .hear{
-
-
 height: 5vh;
 width: 5vh;
 padding: 2vh;
@@ -107,7 +105,20 @@ background: #654;
 animation: ph ease 0.5s infinite;
 cursor: pointer;
 z-index: 5;
-margin:1vh;
+margin:1vh 5vh;
+}
+img.donthear{
+position:fixed;
+height: 5vh;
+width: 5vh;
+padding: 2vh;
+border-radius: 5vh;
+background: #700;
+animation: des ease 5s infinite, ph2 ease 0.5s infinite;
+cursor: pointer;
+z-index: 5;
+margin:1vh 5vh;
+transition:top 0.2s ease;
 }
 
 @keyframes ph{
@@ -119,6 +130,28 @@ margin:1vh;
     }
     100%{
         transform: translateX(-5%) rotateZ(-5deg);
+    }
+}
+@keyframes ph2{
+    0%{
+        transform: translateX(-5%) rotateZ(85deg);
+    }
+    50%{
+        transform: translateX(5%) rotateZ(95deg);
+    }
+    100%{
+        transform: translateX(-5%) rotateZ(85deg);
+    }
+}
+@keyframes des{
+    0%{
+        opacity:0.2;
+    }
+    50%{
+     opacity:0.8;
+    }
+    100%{
+        opacity:0.2;
     }
 }
 @keyframes xh{
@@ -183,9 +216,32 @@ backdrop-filter:blur(2vh);
 touch-action:none;
 z-index:10;
 }
-#overhead>p{
-color: #ff0;
- text-shadow:0 0 1vh #999 , 0 1vh 1px #995;
+#overhead>div{
+ max-width:40vh;
+ color: #ccc;
+ box-shadow:-1vh  -1vh 1vh 0.3vh #4c1f1366 inset,0 0 1vh #4a4141;
+ padding:3vh;
+ border-radius: 3vh;
+ background: #121215;
+ border: 2px solid #764e31;
+ text-align:center;
+}
+#overhead a{
+ color: #ffa840;
+ text-decoration: none;
+}
+#enter{
+ border: 2px solid #815520;
+ box-shadow:0 0 0 2px #764131;
+ padding: 1vh;
+ margin: 1vh;
+ border-radius: 1vh;
+}
+#noenter{
+ border: 2px solid #444;
+ padding: 1vh;
+ margin: 1vh;
+ border-radius: 1vh;
 }
 </style>
 </head>
@@ -196,20 +252,26 @@ color: #ff0;
 <div id="hears">
  <img src="phone.svg" alt="接聽" class="hear">
 <img src="phone.svg" alt="接聽" class="hear">
-<img src="phone.svg" alt="接聽" class="hear">
-<img src="phone.svg" alt="接聽" class="hear">
-
 </div>
+<img src="phone.svg" alt="拒接" class="donthear hear">
 <main id="main"><img src="xi.jpg" id="xih" alt="習近平"/>
 <h1>習近平</h1><h2>打電話給你</h2></main>
 
 <footer>
 <a href="https://www.threads.com/@real.xijinpig.cn" target="_blank"><img src="th.ico" alt="Threads"></a>
 <a href="https://www.instagram.com/real.xijinpig.cn" target="_blank"><img src="ig.png" alt="Instagram"></a>
-<a href="https://discord.gg/QzpD2nwjXR" target="_blank"><img src="dc.ico" alt="Discord"></a><a href="/tic" style="font-size:3vh ;border-radius: 3vh;background: #8098ff;padding: 1vh;">約</a><div style="width:90vw;"><p>中國北京市公安處 番號：00008964</p></div>
-<a href="/mg" style="font-size:2vh ;border-radius: 3vh;background: #d50;padding: 1vh 2vh;">近平音遊</a>
+<a href="https://discord.gg/QzpD2nwjXR" target="_blank"><img src="dc.ico" alt="Discord"></a><a href="/tic" style="font-size:2vh ;border-radius: 3vh;background: #8098ffaa;padding: 1vh;" target="_blank">約</a><a href="/reward" style="font-size:2vh ;border-radius:3vh;background: #3333;padding: 1vh;" target="_blank">懸賞</a><a href="/mg" style="font-size:2vh ;border-radius: 3vh;background: #d503;padding: 1vh 2vh;" target="_blank">音遊</a><div style="width:90vw;"><p>中國北京市公安處 番號：00008964</p></div>
+
 </footer>
-<div id="overhead"><p>點擊來開始</p></div>
+<div id="overhead"><div><a>🔞通商寬衣，う阔え地，终身难ゑ?🆎️</a><p>
+⣿⣿⠃⠄⠄⠄⠄⠄⠄⡀⢿⣿<br>
+⣿⡟⢀⣿⣿⣶⣷⣶⠄⠄⣿⣿<br>
+⣿⡇⣼⣿⣿⣿⣿⣿⠄⢸⣿⣿<br>
+⣿⣿⣇⣿⠿⠙⡟⣴⣽⣧⢸⣿<br>
+⣿⣿⣿⣿⣟⣾⣷⣶⣶⣿⣿⣿<br>
+⣿⣿⣿⣹⠘⠷⣀⡶⠈⠄⣿⣿<br>
+⣿⣿⣿⣿⡘⣷⠿⠃⠄⡇⠻⣿<br>
+⣿⣿⡿⠋⣷⠄⠄⣀⣾⠄⠄⠉<br></p><p id="enter">是的，進入🥵</p><p id="noenter">不是的，直接懷念</p><p><a href="https://discord.gg/QzpD2nwjXR" target="_blank">使用條款</a>•<a href="https://discord.gg/QzpD2nwjXR" target="_blank">沒隱私權政策</a></p><p>© truexijinpig.github.io, 2026</p></div></div>
 
 <audio id="player" src="ring.mp3" hidden loop></audio>
 <script>
@@ -226,6 +288,14 @@ for (let i=0;i<100;i++){
     css(el,{left:(i%2)*30-30+i+"vw",top:Math.random()*60+i-30+"vh",transform:`rotateZ(${Math.random()*10-20}deg)`,fontSize:Math.random()*5+"vh"})
 }
 
+setInterval(()=>{
+ css(document.querySelectorAll(".donthear")[0],{left:Math.random()*80+10+"vw",top:Math.random()*60+10+"vh"})
+},1000);
+
+
+
+
+
 /*window.onload=()=>{};*/
 var playedd=false;
 const player = document.getElementById("player");
@@ -239,7 +309,7 @@ function playAudio() {
 }
 
 function pauseAudio() {
-      player.pause();
+    player.pause();
 }
 
 Array.from(document.querySelectorAll(".hear")).forEach(el=>{
@@ -253,6 +323,7 @@ el.addEventListener("click",function
     video.volume=1;
     video.play();
     css(gi("hears"),{display:"none"});
+    css(document.querySelectorAll(".donthear")[0],{display:"none"});
     hf();
     pauseAudio();
 });
