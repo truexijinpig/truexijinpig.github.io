@@ -377,6 +377,7 @@ for (let i=0;i<100;i++){
 
 var binfo={name:"刁迈乎",chap:10,tit:"治國理政"};
 var chaps=[],pages=[];
+var whos="xi.jpg";
 
 setstep(1);
 
@@ -413,7 +414,7 @@ function setstep(n) {
 
 
 
-var whos="/xi.jpg";
+
 
 function to1() {
  gi("main").innerHTML=`<h1>治國理政生成器</h1><p>生成屬於你的整本治國理政</p><div id="bprev"></div><p>你的暱稱</p><input id="name" type="text"/><p>主題</p><input id="tit" type="text"/><p>預計章節數</p><input id="chap" type="number"/><p>封面頭像</p><p>選擇檔案</p><input id="who" type="file" accept="image/*"/><div id="next">下一步</div>`;
