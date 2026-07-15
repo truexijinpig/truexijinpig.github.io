@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+
+<head>
+    <title>治國理政生成器</title>
+    <link data-default-icon="xi.jpg" rel="icon"
+        sizes="192x192" href="xi.jpg" />
+    <meta name="bingbot" content="noarchive" />
+    <meta name="robots" content="noarchive, noimageindex" />
+    <meta name="copyright" content="人民網版權所有" />
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta id="viewport" name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, viewport-fit=cover" />
+    <meta name="theme-color" content="#FF0000" />
+    <meta name="theme-color" content="#8c0500" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" sizes="76x76"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="120x120"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="152x152"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="167x167"
+        href="xi.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="xi.jpg" />
+    <link data-default-icon="xi.jpg" rel="shortcut icon"
+        type="image/x-icon" href="xi.jpg" />
+    <meta property="og:site_name" content="與習近平對話" />
+    <meta property="og:title" content="習近平打電話給你" />
+    <meta property="og:image" content="xi.jpg" />
+    <meta property="fb:app_id" content="124024574287414" />
+    <meta name="description"
+        content="與習近平對話" />
+<meta name="og:description"
+        content="與習近平對話" />
+    <meta name="application-title" content="與習近平對話" />
+    <meta name="color-scheme" content="light" />
+   
+<style>
+    #back{
+        background: -webkit-linear-gradient(50deg , #8c0000 , #350000);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+display:block;
+z-index:0;
+    }
+    #back>p{
+        color: #fff1;
+        text-wrap: nowrap;
+        position: fixed;
+    }
+body{
+ overflow-y:scroll;
+ overflow-x:hidden;
+}
+h1{
+font-size: 3vh;margin: 1vh;background: linear-gradient(50deg , #ff1010,#ff0) text;color: #0000;
+text-shadow:0 -1vh 1vh #ff05,1vh 0 1vh #f055;
+}
+h2{
+font-size: 3vh; color: #ff9;margin: 0.5vh;}
+
+main{
+padding: 1vw;
+top:7vh;
+width: 98vw;
+ display:flex;
+ justify-content:center;
+ flex-direction:column;
+position:relative;
+z-index:5;
+align-items:center;
+color:#ddd;
+}
+#xih{
+border-radius: 3vh;
+height: 5vh;
+width: 5vh;
+animation: xh 0.2s  infinite;
+box-shadow:0 0 1vh #ffdc2b6a;
+}
+#hears{
+ position: fixed;
+top: 55vh;
+left: calc(50vw - 22vh);
+height:14vh;
+display:flex;
+align-items:center;
+justify-content:center;
+width:44vh;
+flex-wrap:wrap;
+z-index:6;
+}
+
+
+
+@keyframes ph{
+    0%{
+        transform: translateX(-5%) rotateZ(-5deg);
+    }
+    50%{
+        transform: translateX(5%) rotateZ(5deg);
+    }
+    100%{
+        transform: translateX(-5%) rotateZ(-5deg);
+    }
+}
+@keyframes ph2{
+    0%{
+        transform: translateX(-5%) rotateZ(85deg);
+    }
+    50%{
+        transform: translateX(5%) rotateZ(95deg);
+    }
+    100%{
+        transform: translateX(-5%) rotateZ(85deg);
+    }
+}
+@keyframes des{
+    0%{
+        opacity:0.2;
+    }
+    50%{
+     opacity:0.8;
+    }
+    100%{
+        opacity:0.2;
+    }
+}
+@keyframes xh{
+    0%{
+        transform: translateY(1px) ;
+    }
+    50%{
+        transform: translateY(-0.5vh) ;
+    }
+    100%{
+        transform: translateY(1px) ;
+    }
+}
+
+footer{
+    /*top: 70vh;*/
+    /*left: 50vw;
+    transform: translateX(-50%);*/
+    top:10vh;
+    position: relative;
+    margin: 2vh;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    border-radius: 3vh;
+    box-shadow:0 0 1vh #f4d5ff5e,1vh 2vh 2vh #5252523d,0.5vh 0.5vh 1vh #ff69405a inset,-0.5vh -0.5vh 1vh #9b274040 inset;
+    color:#766;
+}
+footer img{
+    width: 5vh;
+    height: 5vh;
+    border-radius: 5vh;
+    cursor: pointer;
+    box-shadow:0 0 1vh #f4d5ff5e;
+}
+footer>*{
+    /*transition: all 0.5s ease;*/
+    text-align:center;
+    font-size:2vh;
+    color:#ddd;
+    text-decoration: none;
+    margin: 1vh;
+}
+footer img:hover{
+    box-shadow: 0 0 1vh #fff3;
+}
+
+header{
+ position: fixed;
+ z-index:10;
+ top: 0;
+ left: 0;
+ width: 100vw;
+ height: 6vh;
+ background: #ff404044;
+ backdrop-filter:blur(1vh);
+ display:flex;
+align-items:center;
+justify-content:center;
+}
+header>*{
+ margin: 0 1vh;
+}
+.step{
+ width: 3vh;
+ height: 2vh;
+ border-radius: 5vh;
+ background: #57494c;
+ transition:all 0.5s ease;
+}
+input{
+ padding: 1vh;
+ margin:  1vh 0;
+ color: #fff;
+ text-shadow:0 1px 1vh #000;
+ background: #ddd5;
+ border-radius: 2vh;
+ box-shadow:0 0 1vh #ddd5;
+ backdrop-filter:blur(1px);
+ font-size:2vh;
+ border:none;
+}
+input::placeholder{
+ color:#f99;
+}
+.pages{
+ margin: 1vh 2vh;
+ padding: 3vh 1vh;
+ border-radius: 1vh;
+ min-width: 90vw;
+ background: #a2877a2e;
+}
+.pages p{
+ text-indent:5vh;
+}
+#next{
+ background: #ffdc559b;
+ text-shadow:0 1px 1vh #000;
+ padding: 1vh;
+ border-radius: 2vh;
+ box-shadow:0 0 1vh #ddd5;
+}
+#bprev{
+ height:30vh;
+ width:20vh;
+ background: #fff4d5;
+ box-shadow:1vh 0 1vh #0002 inset,0 0 1vh 2px #fff;
+ margin: 1vh;
+ padding: 1vh;
+ display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+}
+#bprev h1{
+ color:#8e2918;
+ font-size:2vh;
+ text-shadow:0 0 0 #111;
+}
+#bprev h2{
+ color:#643d2c;
+ font-size:1.5vh;
+}
+#bprev img{
+ width: 7vh;
+ height: 9vh;
+ filter:blur(1px);
+ border-radius:5vh;
+ margin: 1vh;
+}
+#bbprev{
+ height:60vh;
+ min-width:40vh;
+ 
+ background: #fff4d5;
+ box-shadow:2vh 0 2vh #0002 inset,0 0 2vh 4px #fff;
+ margin: 1vh;
+ padding: 1vh;
+ display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+}
+#bbprev h1{
+ color:#8e2918;
+ font-size:4vh;
+ text-shadow:0 0 0 #111;
+}
+#bbprev h2{
+ color:#643d2c;
+ font-size:3vh;
+}
+#bbprev img{
+ width: 14vh;
+ height: 18vh;
+ filter:blur(1px);
+ border-radius:10vh;
+ margin: 2vh;
+}
+#who{
+ opacity:0.3;
+ filter:brightness(0);
+ transform:translateY(-8vh);
+ height:5vh;
+ box-shadow:0 0 1vh #fff;
+ width: 25vh;
+}
+</style>
+</head>
+<body>
+<div id="back">
+
+</div>
+<header><img src="xi.jpg" id="xih" alt="習近平"/><div class="step"></div><div class="step"></div><div class="step"></div></header>
+<main id="main">
+<h1>治國理政生成器</h1><p>生成屬於你的整本治國理政</p>
+<p>正在翻牆載入……</p>
+</main>
+
+<footer>
+<a href="https://www.threads.com/@real.xijinpig.cn" target="_blank"><img src="th.ico" alt="Threads"></a>
+<a href="https://www.instagram.com/real.xijinpig.cn" target="_blank"><img src="ig.png" alt="Instagram"></a>
+<a href="https://discord.gg/QzpD2nwjXR" target="_blank"><img src="dc.ico" alt="Discord"></a><a href="/tic" style="text-shadow:0 0 2px #ff5589;" target="_blank">約</a>•<a href="/reward" style="text-shadow:0 0 2px #ffdd80;" target="_blank">懸賞產生器</a>•<a href="/mg" style="text-shadow:0 0 2px #ff6abd;" target="_blank">音遊</a><div style="width:90vw;font-size:1vh"><p>中國北京市公安處 番號：00008964</p></div>
+
+</footer>
+
+<script src="https://unpkg.com/pdfmake@0.3/build/pdfmake.min.js"></script>
+<script src="https://unpkg.com/pdfmake@0.3/build/vfs_fonts.js"></script>
+
+    <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+
+  <body>
+
+    <script>
+      function generate() {
+        const doc = new docx.Document({
+          sections: [{
+            properties: {},
+            children: [
+              new docx.Paragraph({
+                children: [
+                  new docx.TextRun("Hello World"),
+                  new docx.TextRun({
+                    text: "Foo Bar",
+                    bold: true,
+                  }),
+                  new docx.TextRun({
+                    text: "\tGithub is the best",
+                    bold: true,
+                  }),
+                ],
+              }),
+            ],
+          }]
+        });
+
+        docx.Packer.toBlob(doc).then(blob => {
+          console.log(blob);
+          saveAs(blob, "example.docx");
+          console.log("Document created successfully");
+        });
+      }
+
+    </script>
+
+  </body>
+
+</html>
+
+<script>
+
+
+let gt=['中國贏麻了','GDP再創新高','器官捐贈天下第一','千秋萬載一桶江湖','先服永享受雨天騎',"我們懷念他","想開心了?","去新疆!","不同意的請舉手","愛我才是愛國","親自部署，親自指揮","通商寬衣，不強自習","讓你墜樓"];
+for (let i=0;i<100;i++){
+    let nt= parseInt(gt.length*Math.random());
+    let el=dc("p",undefined,gt[nt]);
+    gi("back").appendChild(el);
+    css(el,{left:(i%2)*30-30+i+"vw",top:Math.random()*60+i-30+"vh",transform:`rotateZ(${Math.random()*10-20}deg)`,fontSize:Math.random()*5+"vh"})
+}
+
+var binfo={name:"刁迈乎",chap:10,tit:"治國理政"};
+var chaps=[],pages=[];
+
+setstep(1);
+
+function setstep(n) {
+ gi("main").innerHTML="";
+ let sss=gq(".step")
+ let c=0;
+ let fs=[to1,to2,to3];
+ for(let s of sss){
+  c++;
+  if(c<=n){
+   css(s,{background: "-webkit-linear-gradient(50deg , #ffaaf4 ,#ff8a80 )"});
+   s.dataset.c=c;
+   s.onclick=function () {
+    setstep(Number(s.dataset.c));
+   }
+  }else{
+   css(s,{background: "#6e5353"});
+   s.onclick=null;
+  }
+  if(c==n){
+   css(s,{width:"6vh"});
+  }else{
+   css(s,{width:"3vh"});
+  }
+  
+ }
+ 
+ fs[n-1]();
+ 
+  gq("html")[0].scrollTop=0;
+ 
+}
+
+
+
+var whos="/xi.jpg";
+
+function to1() {
+ gi("main").innerHTML=`<h1>治國理政生成器</h1><p>生成屬於你的整本治國理政</p><div id="bprev"></div><p>你的暱稱</p><input id="name" type="text"/><p>主題</p><input id="tit" type="text"/><p>預計章節數</p><input id="chap" type="number"/><p>封面頭像</p><p>選擇檔案</p><input id="who" type="file" accept="image/*"/><div id="next">下一步</div>`;
+ for(let i in binfo){
+  gi(i).value=binfo[i];
+  gi(i).addEventListener("input",function () {
+   binfo[i]=this.value;
+   upbprev();
+  });
+ }
+ upbprev(); gi("who").addEventListener("change",function () {
+   const file = event.target.files[0];
+        let src;
+        if (file) {
+            const reader = new FileReader(); 
+            reader.onload = function(e) {
+    src = e.target.result;
+    whos=src;
+    upbprev();
+            }; 
+ reader.readAsDataURL(file);
+ 
+     }
+  });
+  gi("next").addEventListener("click",function () {
+  chaps=[];
+  if (binfo.chap>1000){
+   binfo.chap=1000;
+  }
+  for(let c=0;c<binfo.chap;c++){
+   chaps.push(genchap());
+  }
+  setstep(2);
+ });
+}
+
+function upbprev() {
+ gi("bprev").innerHTML=`<IMG alt="騷貨"><h1></h1><h2></h2>`;
+ gi("bprev").querySelector("h1").innerText=binfo.name;
+ gi("bprev").querySelector("h2").innerText=`談${binfo.tit}`;
+ gi("bprev").querySelector("img").src=whos;
+ 
+}
+
+var naon=["中國夢","偉大復興","夢想","必經之路","正能量","增長","思想統一","精神","前進","&tit","&tb","&tf與&tb","中朝關係","中俄關係","不能是紙上談兵","轉化成為民族復興的動力","是&tf的重要關鍵","文化軟實力","贏麻","社會靠得是&tb","&tf社會","領導","薩格爾王","百年未有之大變局","冰棒外交","通商寬衣","黨領經濟","海內外中國兒女共同的夢","偉大夢想","指明方向","常生不老","共同富裕"],adj=["中華民族","偉大","最偉大","強盛","繁榮","不可或缺","黨","重要","&tf","深刻","努力","民族團結","法律","改革開放","天才","非常&tb","疫情封城","150歲","&tf文明","法治","馬克斯","共同","憲法","中南海","天安門廣場","梁家河沼氣池","上海","深圳","福州"],verb=["什麼是","必須實現","如何實現","深化","解釋","改革開放是","黨指揮槍桿子是","指揮","帶動","一帶一路","一定要達成","人民是","關於","確實弄好","推動","&tf不只是","持續的","談","論","關於","培育","將","提高","一定要服從","&tf","為"],scopt=["中南海","天安門廣場","梁家河沼氣池","上海","香港地下防空洞","深圳","福州","澳門"];
+
+
+function genchap() {
+  let t=`${rc(verb)}${rc(adj)}的${rc(naon)}`;
+  t=t.replaceAll("&tit",binfo.tit);
+  t=t.replaceAll("&tf",binfo.tit.slice(0,2));
+  t=t.replaceAll("&tb",binfo.tit.slice(-2));
+  return t
+}
+function to2() {
+  let c=0;
+  gi("main").innerHTML="<H1>檢查章節</H1><P>替你生成了大量章節請檢查，滑至底按生成整本書！</P>"
+  for(let i of chaps){
+   let e=dc("input");
+   e.type="text";
+   e.className="chaps";
+   e.value=i;
+   e.dataset.c=c;
+   gi("main").appendChild(e);
+   e.addEventListener("input",function () {
+    chaps[Number(this.dataset.c)]=this.value;
+   });
+   c++;
+  }
+  let e=dc("div","next");
+  e.innerText="生成整本書";
+  gi("main").appendChild(e);
+  gi("next").addEventListener("click",function () {
+  setstep(3);
+ });
+}
+
+
+var books=["馬克思","薩格爾王","將爾","馬可波羅遊記","唐詩","宋詞","元曲","明清短篇小說","資本論","孤雛淚","梭罗","惠特曼","马克·吐温","杰克·伦敦","老人与海","联邦党人文集","托马斯·潘恩的《常识》","恩格斯","新華詞典"];
+var guns=[["社会主义&tb，从本质上讲，就是人民的&tb","&tit是人民的重要課題","&so既是历史的创造者、也是历史的见证者，既是历史的“&tb”、也是历史的“&so”","随着人民生活水平不断&sv，人民对包括&tb在内的&so产品的质量、品位、风格等的要求也更&sa了",
+"人民的需要是&so存在的根本价值所在。能不能搞出优秀&tb，最根本的决定于是否能为人民抒写、为人民抒情、为人民抒怀",
+"8年后的今天，世界&so又走到一个关键当口","知行合一，采取务实行动。承诺一千，不如落实一件","&tit，发扬&sa精神。&tf精神是&so最宝贵的财富","历史地看，&sv&so是&tb发展的客观要求和&tf的必然结果，不是哪些人、哪些国家人为造出来的","&name同志指出&sv&so是一場&sa的偉大斗争，必須加緊腳步&sv","&name在上海&sv&tit，替&so&sv指明了方向","当然，我们也要承认，&sv&so是一把“双刃剑”"
+,"尊重人民主体地位，保证人民当家作主，是我们党的一贯主张","五年来，我们坚持加强&sa的全面&so和党中央集中统一&so，全力推进全面建成&tf社会进程，完整、准确、全面&sv&sa&so","&sa的&tb指出，坚持和发展&so是一项长期而艰巨的历史任务，必须准备进行具有许多新的历史特点的伟大斗争","伟大的斗争，宏伟的事业，需要高&sa&so","会议认为，&sa過去十年以來以来，&sv取得历史性成就、发生历史性变革","近日，在看到有关报刊刊载的《&sv&so高发亟待干预》一文后，我又作出上述指示，为这项工作进一步指明了方向","明确了家庭、学校、医疗卫生机构等各方面责任，并决定&sv&sa&so工作评议考核制度","&name沿&sc江桥步行察看&so江岸风貌，了解人文历史和城乡变迁，走进&sa花园实地考察城市环境综合治理和海绵城市建设等情况","临近傍晚，&name来到&sc&sa市民中心考察调研，替&sc人民指明了方向","&sc社区居住着来自50多个国家和地区的居民，他們都支持&name&tit","&name來到&sc訪查，替建設美好&sc指明了方向"],["&so要反映好人民心声，就要坚持&sv、&tf这个根本方向","要推动&so治理的重心和配套资源向&so下沉，聚焦&sv、&tf、&tb和&sa服务等主责主业",
+"这是&tf对&so战线提出的一项&sa要求，也是决定我&tf&so事业前途命运的关键",
+"只有牢固树立马克思主义&so观，真正做到了以&sa为中心，&so才能发挥最大正能量",
+"以人民为中心，就是要把满足人民&so需求作为&tit的出发点和落脚点，把人民作为&so表现的主体，把人民作为&sv&so的鉴赏家和评判者，把为人民服务作为&so工作者的天职","我勉励他们注重&sv&tf&so，增强为国争光的荣誉感，坚定创造佳绩的信心，刻苦训练、全力备战、勇攀高峰，力争实现新的突破",
+"我最大的愛好是讀書，我青年時代讀過&bs，讀書已成為我終身的嗜好","我隨時讀書，我曾經讀過&bs，留下了深刻的印象","我常常讀書，讀各類書，我少年時期讀過&bs","我在下鄉的時候，每天放羊時就在羊背上，讀著&bs","我六歲就讀過&bs，讀書已經成為了自己的一種生活方式","&so像是大雨掀翻小池塘一般，要挺過瘋狂宇宙","為&tit，要全面&sa的提升社會福利、教育、求職、老人瞻仰","對於&so的經濟開放，將&sa的輕關易道、通商寬衣","&tit，這是金科律欲、&sa的道理","因时而兴，乘势而变，随时代而行，与时代同频共振",
+"在人类发展的每一个重大历史关头，&so能发时代之先声、开社会之先风、启智慧之先河，成为时代变迁和&sa的先导","孩子们从牙牙学语起就开始接受家教，有什么样的家教，就有什么样的人","家庭教育涉及很多方面，但最重要的是&so，是如何做人的教育","也就是古人说的“爱&tf，&so”，“爱不&sv，适所以&so也”","青少年是家庭的未来和希望，更是国家的未来和希望",
+"古人都知道，养不教，父之过。家长应该担负起&sv后代的责任","任何组织和个人都必须尊重&so权威，都必须在&so范围内活动，都必须依照&sa宪法法律行使权力或权利、履行职责或义务，都不得有超越&so的特权","我们要毫不动摇走&tit道路，长期坚持、全面贯彻、不断发展人民代表大会制度、&sa的多党合作和政治协商制度、民族区域自治制度、基层群众自治制度，发展社会主义协商民主，巩固和发展最广泛的爱国统一战线，扩大人民群众有序政治参与，保证人民广泛参加国家&so和社会&so，形成生动活泼、&sa的政治局面","着力推动高质量&so，主动构建新发展格局，蹄疾步稳推进&tb，扎实推进全过程人民民主，全面推进依法&sv，积极&sv社会主义先进文化，突出&so和改善&so，集中力量实施&sa攻坚战，大力推进&so文明建设，坚决维护国家安全，防范化解重大风险，保持社会大局稳定，大力度推进国防和军队现代化建设，全方位&sv&sa特色大国外交，全面推进党的建设新的伟大&so","几亿&sa民整体迈入现代化，会释放巨大的创造动能和&sv潜能，为&so发展注入强大动力","畅通工衣城乡循环，是畅通国内&tb大循环、增强我国&tb韧性和战略纵深的重要方面","扩&so、稳增长、促发展，&tb&sa国&sv是重要的发力点和突破口","&so还是国家安全的基础，&so保的是生命安全、生存安全，是极端重要的&tf安全","当今世界，百年未有之大变局加速演进，新冠疫情反复延岩，来自外部的打压遏制不断升级，各种不确定难预料因素明显增多","中美兩國雖然必有一戰，但在&tf&sv下，回顧歷史，發展冰棒外交是當前之道","完善正确&sv新形势下人民内部矛盾机制，加强和改进人民維穩，阻止和规范群众诉求表达、利益协调、权益保障通道，完善网格化管理、針對化服务、信息化支撑的基层治理平台，健全城乡社区治理体系，及时把矛盾纠纷化解(壓)在基层、化解(打)在萌芽状态","加快&sv&so社会&tf&sa化，提高&so社会&tf能力。强化社会治安整体防控(維尼)，推进扫黑除恶常态化(收編)，依法严惩群众反映&sa的各类违法犯罪活动(反党份子)","发展壮大群防群治力量，营造见义勇为(嘉豪味冰)社会氛围，建设人人有责、人人尽责(自我審查)、人人&tb的社会治理共同体","实现建军一百年奋斗目标，开创&sv&sa的&so，實現&tit","大兴&so，总结用好我国开放发展的成功经验，加强对&tb工作的战略性、系统性、前瞻性谋划，把国际&so领域的新情况新以高水平对外开放促进深层次改革、高质量&so问题摸准吃透，做到心中有数、手中有&so、行动有力","坚决防止和纠正&sv的不正之风，把党和人民需要的好&so精心培养起来、及时发现出来、合理使用起来","贏麻是一个民族赖以长久生存的灵魂，唯有精神上达到一定的勝利，这个民族才能&sv&so，&tit","啟示我们：心中有&so，脚下有力量；没有牢不可破的&sa&so，没有崇高&so的有力&sv，要取得长征胜利是不可想象的","&tb、&so的&sv策 略，&sa、&tf的&so理念，等等， 都彰显了 &sa&so的智慧","要优化人大常委会、专门委员会组成人员结构，打造政治坚定、服务人民、尊崇&so、发扬&so、勤勉尽责的人大工作队伍，不断提高新时代新征程人大工作质量和水平","深入推&sa化&sv，深化联合&sv、对抗&sv、科技&sv。&sv力量常态化多样化运用，坚定灵活开展&sa斗争，塑造&sa态势，遏控危机&so，&sv&so","是&tb保持长期繁荣稳定的最佳&so安排，必须长期坚持","为了1亿多人口的党，&tb用几十年的时间走完了发达国家几百年走过的发展历程，这其中&name的付出和功勞是可想而知的","政治上，&so要&sv真诚友好，在涉及彼此核心利益和重大关切的问题上继续相互理解、相互支持。经济上，&so要抓住双方转变&tf方式带来的机遇，&sv合作潜力，创新合作模式，深化利益融合，建立持久稳定的互利经贸合作伙伴关系。人文上，&so要加强文明对话和文化交流，不仅各美其美，而且美人之美，美美与共成为不同文明","弘扬&tit精神，就是要尊重道路选择","&so必同，期于&tb;治不必&sa，期于&tf","争取&sv贸易额从去年的 6000 亿美元在未来10 年增至 9000 亿美元","同时，必须清醒地看到，新形势下我&so安全和社会安定面临的威胁和挑战增多，特别是各种威胁和挑战联动效应明显，必須加緊&sv&so並時時支持偉大的我","&sv事关国家安全，事关人民群众切身利益，事关改革发展稳定全局，是一场维护祖国统一、社会安定、人民幸福的&tb，必须采取坚决果断措施，保持严打高压态势，坚决把反&sv分子嚣张气焰打下去","要正确&sv&so同&tb的关系，牢固树立&tb就是保护&so","文化方面，堅守&so、加速&tb，從&sv到&sa是精甚細膩的工藝品","要完善各类&tb管理体制，改革&tb&sv制，加快&so布局&sv、结构调整、战略性重组，促进&so&sv&tf，推动&so做强做优做大，有效防止&so流失，不強自習","深化&tb改革，&sv混合所有制&so，培育具有全球竞争力的&so。全面&sv&so负面清单制度，別管今兒鬧得歡，小心今後拉清單","支持民营企业&sv，激发各类市场主体活力" ,
+"深化&so制度改革，打破行政性垄断，防止市场垄断，加快&sv&so",
+"放宽&sa&sv&so限制，完善社會信用体制","创新和完善宏观调控，发挥国家发展规划的战略导向作用，健全财政、货币、产业、区域等&tit机制","加快建立现代&sv制度，建立权责清晰、&so协调、区域均衡的中央和地方财政关系","建立全面规范透明、标准科学、约束有力的&so制度，全面&sv管理","深化&so改革，健全地方&so；深化&tb改革，增强&sv能力，提高直接&sv比重，促进&tit健康发展","我党向來傾聽人民訴求，在疫情中，我親自指揮親自指導，成功清零，&sv&sa的&so",
+"不僅僅要&tit，更要&sv&so，還要&sv&sa的&tb","不只是&sa的&so，更是全世界的&tf&so","&tit不但要&sa更要&sv&so，&tit不只是人民的&so還是&sa的&so，也同時是世界的&so","中國共產黨領導中國，中國是由中國共產黨領導的，&tit是海內外中國人民共同的夢","&name替&sc人民在&tit方面、&sv方面、&so方面，做出了以上重大指示，為&tb奠定了&so的基礎"
+,"隨著生物技術的不斷發展，人類的器官會不斷移植，人是越活越年輕，甚至常生不老，預測本世紀呢，可能可以活到150歲","我在&sc發表重要談話時時指出，用力建設新&sc，大力發展&sc&so刻不容緩"]];
+var allblen=0;
+function genpage(chap) {
+ let sv=chap.replaceAll("序▪︎","").slice(0,2),sa=chap.slice(3,-2),so=chap.slice(-2),txt;
+ let e=dc("div");
+ e.className="pages";
+ e.innerHTML="<h1></h1>";
+ e.querySelector("h1").innerText=chap;
+ pages.push({ text: chap, style: 'h1'});
+ for (let i of verb){
+  if(chap.indexOf(i)!=-1)sv=i;
+ }
+ for (let i of adj){
+  if(chap.indexOf(i)!=-1)sa=i;
+ }
+ for (let i of naon){
+  if(chap.indexOf(i)!=-1)so=i;
+ }
+ let wg;
+ let sc=wash(scopt)[0];
+ txt=delt(guns[0]);
+ wg=wash(guns[1])
+ for(let i=0;i<3;i++){
+   txt+=delt([wg[i]]);
+ }
+ td=dc("p");
+ td.innerText=txt;
+ e.appendChild(td);
+ pages.push({ text: "   "+txt, style: 'content' });
+ txt="第一，"+delt(guns[0]);
+ wg=wash(guns[1])
+ for(let i=0;i<5;i++){
+   txt+=delt([wg[i]]);
+ }
+ td=dc("p");
+ td.innerText=txt;
+ e.appendChild(td);
+ pages.push({ text: "   "+txt, style: 'content' });
+ txt="第二，"+delt(guns[0]);
+ wg=wash(guns[1])
+ for(let i=0;i<5;i++){
+   txt+=delt([wg[i]]);
+ }
+ td=dc("p");
+ td.innerText=txt;
+ e.appendChild(td);
+ pages.push({ text: "   "+txt, style: 'content' });
+ txt="因此，"+delt(guns[0]);
+ wg=wash(guns[1])
+ for(let i=0;i<5;i++){
+   txt+=delt([wg[i]]);
+ }
+ td=dc("p");
+ td.innerText=txt;
+ e.appendChild(td);
+ pages.push({ text: "   "+txt, style: 'content' });
+ allblen+=8;
+ function delt(ls) {
+  let bs=wash(books).slice(0,5);
+  bs=bs.join("、");
+  let t=rc(ls);
+  
+  t=t.replaceAll("&tit",binfo.tit);
+  t=t.replaceAll("&tf",binfo.tit.slice(0,2));
+  t=t.replaceAll("&tb",binfo.tit.slice(-2));
+  t=t.replaceAll("&name",binfo.name);
+  t=t.replaceAll("&so",so);
+  t=t.replaceAll("&sa",sa);
+  t=t.replaceAll("&sv",sv);
+  t=t.replaceAll("&bs",bs);
+  t=t.replaceAll("&sc",sc);
+  allblen+=t.length+1;
+  return t+"。";
+ }
+ return e;
+}
+
+function to3() {
+ pages=[];
+ pages.push({ text: binfo.name, style: 'header' });
+ pages.push({ text:`談${binfo.tit}`, style: 'subHeader' });
+ allblen=0;
+ gi("main").innerHTML=`<h1>內容欣賞</h1><p>已生成整本書，往下滑欣賞。</p><div id="download"></div><p>注意！下載版會是白底黑字書本風格而非本網頁風格。</p>`
+ let e=dc("div","bbprev");
+ e.className="pages";
+ e.innerHTML="<img alt='騷貨'><h1></h1><h2></h2>";
+ e.querySelector("h1").innerText=binfo.name;
+ e.querySelector("h2").innerText="談"+binfo.tit;
+ e.querySelector("img").src=whos;
+ 
+ gi("main").appendChild(e);
+ e=dc("div");
+ e.className="pages";
+ e.innerHTML=`<h1>目次</h1><p id="mooz"></p>`;
+ gi("main").appendChild(e);
+ pages.push({ text: "目次", style: 'h1'});
+ let mts="";
+ let c=0;
+ chaps.splice(0,0,`序▪︎為${binfo.tit}奮鬥`);
+ for(let i of chaps){
+   mts+=`${i} ${"•".repeat(Math.max(1,17-i.length-String(c+1).length))}${c+1}\n`;
+   c++;
+   
+ gi("main").appendChild(genpage(i));
+  // pages.push( genpage(i))
+ }
+ gi("download").innerText=`下載Docx (約${allblen}字)。`;
+ gi("download").addEventListener("click",async function () {
+  try{
+  var children=[
+   ];
+  const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
+const img = new Image();
+img.src = whos;
+
+img.onload = () => {
+canvas.width = img.width;
+canvas.height = img.height;
+
+// 畫圓角矩形遮罩
+const radius = 30;
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.beginPath();
+ctx.moveTo(radius, 0);
+ctx.lineTo(canvas.width - radius, 0);
+ctx.quadraticCurveTo(canvas.width, 0, canvas.width, radius);
+ctx.lineTo(canvas.width, canvas.height - radius);
+ctx.quadraticCurveTo(canvas.width, canvas.height, canvas.width - radius, canvas.height);
+ctx.lineTo(radius, canvas.height);
+ctx.quadraticCurveTo(0, canvas.height, 0, canvas.height - radius);
+ctx.lineTo(0, radius);
+ctx.quadraticCurveTo(0, 0, radius, 0);
+ctx.closePath();
+ctx.clip();
+
+ctx.drawImage(img, 0, 0);
+
+// 轉成 Uint8Array 再放進 docx
+canvas.toBlob(async (blob) => {
+const arrayBuffer = await blob.arrayBuffer();
+const uint8Array = new Uint8Array(arrayBuffer);
+children.splice(0,0,
+ new docx.Paragraph({
+  children: [
+    new docx.ImageRun({
+     data: uint8Array,
+     transformation: { width: 120, height: 200 },
+      spacing: {
+before: 480, 
+after: 480,
+      }
+      ,alignment: docx.AlignmentType.CENTER
+  })
+  ]
+ })
+);
+
+
+
+ 
+for(let p of pages){
+ const textLines = p.text.split('\n');
+ const textRuns = textLines.map((line, index) => { 
+ return new docx.TextRun({ text: line, break: 1}); 
+ });
+  children.push(new docx.PageBreak())
+  if(p.mooz){
+  
+   for(m of textLines){
+     children.push(new docx.Paragraph({
+      tabStops: [
+        {
+          type: docx.TabStopType.RIGHT,
+          position: 85000,
+          leader: "dot",
+          maxRightTabStop:100
+        },
+      ],
+      children: [
+        new docx.TextRun(m.split("•")[0]),
+        new docx.Tab(),
+        new docx.TextRun(m.split("•").at(-1)||":"),     // 頁碼
+      ]
+     , break: 1
+    }));
+   }
+   continue;
+  }
+  children.push(new docx.Paragraph({
+   style: p.style,
+   children: textRuns,
+   pageBreakBefore: p.style=="h1"?true:0}));
+}
+
+const doc = new docx.Document({
+ creator: `${binfo.name}https://truexijinpig.github.io/`, 
+ title: "Sample Document",
+  description: `偉大、精甚細膩的工藝品`, 
+  features: {
+    updateFields: true
+  },
+  styles: { 
+  paragraphStyles: 
+  [ 
+  { id: "header", name: "精甚細膩", basedOn: "Normal", next: "Normal", quickFormat: true, bold: true,
+    run: { color: "8e2918", size: 32 }, paragraph: {alignment: docx.AlignmentType.CENTER, spacing: { line: 276 }, indent: { left: 0 } } }
+  , { id: "subHeader", name: "冰棒外交", basedOn: "Normal", next: "Normal", quickFormat: true, bold: true, alignment: docx.AlignmentType.CENTER, run: { color: "8e2918", size: 32 }, paragraph: { alignment: docx.AlignmentType.CENTER,spacing: { line: 276 }, indent: { left: 0 },spacing: {
+before: 120, 
+after: 0,
+}, } }, 
+  { id: "h1", name: "精甚細膩", basedOn: "Normal", next: "Normal", quickFormat: true, bold: true, alignment: docx.AlignmentType.CENTER, run: { color: "111111", size: 24 }, paragraph: { alignment: docx.AlignmentType.CENTER,spacing: { line: 276 }, indent: { left: 0 } } }, 
+  { id: "content", name: "薩格爾王", basedOn: "Normal", next: "Normal", quickFormat: true, run: { color: "000000", size: 18 }, paragraph: { spacing: { line: 276 }, indent: { firstLine: 720} } } ] }, 
+  sections: [ { // 設定頁尾
+   footers: { default: 
+  new docx.Footer({ children: [ 
+    new docx.Paragraph({ 
+      alignment: docx.AlignmentType.CENTER, 
+      children: [ new docx.TextRun("第 "), docx.PageNumber.CURRENT, new docx.TextRun(" 頁") ], 
+    }), 
+  ], }),
+   },
+  properties: { page: { size: { orientation: docx.PageOrientation.PORTRAIT,
+   width: docx.convertMillimetersToTwip(210), 
+  // 直式 A4 寬度 210mm 
+  height: docx.convertMillimetersToTwip(297),
+   code: 9 }, margin: { top: docx.convertInchesToTwip(1), right: docx.convertInchesToTwip(1), bottom: docx.convertInchesToTwip(1), left: docx.convertInchesToTwip(1.5), },
+   // 修正 2：在 page 屬性內加入底色設定為白色
+    shading: { fill: "FFFFFF", val: docx.ShadingType.CLEAR } }, },
+     // 內文
+      children: children },
+  
+ ],
+});
+
+  docx.Packer.toBlob(doc).then(blob => {
+          
+          saveAs(blob, "xibook.docx");
+          
+        }).catch(e=>{alert(e)});
+});
+};
+  }catch(e){
+   alert(`下載失敗${e}`)
+  }
+ });
+ e=dc("div");
+ e.className="pages";
+ e.innerHTML=`<h1></h1><p id="mooz"></p>`;
+ e.querySelector("h1").innerText=`${binfo.name}談${binfo.tit}`;
+ e.querySelector("p").innerText=`
+©2025 刁乎出版社有限责任公司
+出版发行:刁乎出版社有限责任公司
+地  址:中国北京天安门广場
+邮政编码: 1000150
+网  址: https://truexijinpig.github.io/ 
+电子邮箱: f1p@xipig.org.cn 
+电  话: 86-10-00008964 86-10-00000150 (发行部)
+86-10-68996094 (编辑部)
+印  刷:豐庆文化科技有限公司
+开  本: 787mm x 1092mm 1/4
+印  張: 37.5 
+装  別: 精装
+版  次: 2026年 6月 初版
+书号: ISBN 978-7-119-14334-7
+定价: 89.64`;
+ gi("main").appendChild(e);
+ pages.push({ text:e.querySelector("p").innerText, style: 'content' });
+ pages.splice(3,0,{ text: mts, style: 'content',mooz:true });
+ gi("mooz").innerText=mts;
+ /*for(let p of pages){
+   e=dc("div");
+   e.innerText=p;
+   gi("main").appendChild(e);
+  }*/
+}
+
+
+
+function st(f,t){
+    setTimeout(f,t);
+}
+function rc(l) {
+ return l[parseInt(Math.random()*l.length)];
+}
+function wash(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+function gq(t) { return Array.from(document.querySelectorAll(t)); }
+function css(element, rules){
+ for (let property in rules){
+  if (rules.hasOwnProperty(property)){
+   element.style[property] = rules[property];
+  }
+ }
+}
+function dc(ty,id,tx,ht){
+    let el=document.createElement(ty);
+    el.id=id;
+    el.innerText=tx;
+    if (ht){
+        el.innerHTML=ht;
+    }
+    return el;
+}
+    function gi(i){
+        let el=document.getElementById(i);
+        if (i){
+            i.on=function(l,f){
+                i.addEventListener(l,f);
+            }
+        }else{
+            console.log(i)
+        }
+        return el;
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
