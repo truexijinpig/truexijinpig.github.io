@@ -1,1 +1,1 @@
-# [不想去新疆的按此](https://truexijinpig.github.io)
+# [不想被懷念的按此](https://truexijinpig.github.io)
