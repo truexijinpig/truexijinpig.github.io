@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>沒有通過</title>
+<style>
+:root{--bg:#e9dcc6;--ink:#2a1a12;--wall:#f4e7cf;--gold:#e0a82e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150d0a;--ink:#f3e6d6;--wall:#2d211a}}
+:root[data-theme="dark"]{--bg:#150d0a;--ink:#f3e6d6;--wall:#2d211a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;user-select:none;touch-action:manipulation}
+#app{max-width:520px;margin:0 auto;padding:8px 8px 12px;display:flex;flex-direction:column;gap:8px}
+#hud{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;padding:0 2px}
+#mute{font-size:18px;background:none;border:0;cursor:pointer;padding:0 4px}
+#board{position:relative;background:#1631c4;border:4px solid #aab4e8;border-radius:8px;padding:8px 14px;color:#e9f7a8;font-weight:700}
+#board h2{margin:0 0 4px;text-align:center;font-size:17px;color:#fff}
+.br{display:flex;justify-content:space-between;font-size:22px;line-height:1.35}
+.br b{font-family:ui-monospace,Menlo,monospace;color:#9dff6a;min-width:3.4ch;text-align:right;letter-spacing:1px}
+#bar{height:7px;border-radius:4px;background:rgba(128,128,128,.35);overflow:hidden}
+#bar i{display:block;height:100%;width:100%;background:#d62828;transform-origin:left}
+#stage{position:relative;border:3px solid var(--ink);border-radius:12px;overflow:hidden;background:#6b0a10}
+#bg{position:absolute;inset:0;width:100%;height:100%}
+#hall{position:relative;padding:6px 4px;display:flex;flex-direction:column;gap:3px}
+.row{position:relative;display:flex;gap:1px;padding:1px 2px;border-radius:8px;background:linear-gradient(#8a1018,#4d070c)}
+.rep{flex:1;min-width:0;aspect-ratio:1/1.1;border:0;background:none;padding:0;border-radius:7px;cursor:pointer;position:relative}
+.rep svg{width:100%;height:100%;display:block;overflow:visible}
+.rep.y{background:rgba(70,210,100,.38)}
+.rep.n{background:rgba(255,70,50,.42)}
+.arm{transition:transform .25s}
+.rep.up .arm.r{transform:rotate(180deg)}
+.kofx,.tear{display:none}
+.rep.ko .person{display:none}
+.rep.ko .kofx{display:block}
+.rep.ko{animation:pop .25s}
+.rep.fear::after{content:"😨";position:absolute;right:-3px;top:-5px;font-size:12px}
+.seat,.hands,.cry{display:none}
+.rep.dead{pointer-events:none}
+.rep.dead .person,.rep.dead .kofx{display:none}
+.rep.dead .seat{display:inline}
+.clap .arm{display:none}
+.clap .hands,.clap .cry{display:inline}
+.clap .tear{display:inline;animation:tear .6s infinite}
+.clap .hl{animation:hl .28s infinite alternate}
+.clap .hr{animation:hr .28s infinite alternate}
+.rep.rose::before{content:"🤚";position:absolute;left:-3px;top:-6px;font-size:14px;z-index:2}
+.clap .rep.rose::before{display:none}
+.em{display:none;position:absolute;left:50%;top:-4px;font-style:normal;font-size:15px;pointer-events:none;z-index:3}
+.clap .rep:not(.dead) .em{display:block;animation:emf 1s infinite}
+@keyframes emf{from{transform:translate(-50%,0);opacity:1}to{transform:translate(-50%,-16px);opacity:0}}
+@keyframes hl{from{transform:translateX(-6px)}to{transform:translateX(0)}}
+@keyframes hr{from{transform:translateX(6px)}to{transform:translateX(0)}}
+@keyframes bob{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+@keyframes tear{from{transform:translateY(0) scale(1);opacity:1}to{transform:translateY(15px) scale(.6);opacity:0}}
+@keyframes pop{from{transform:scale(1.5)}to{transform:scale(1)}}
+#float{position:absolute;left:0;right:0;top:34%;text-align:center;font-size:34px;font-weight:900;color:#fff;text-shadow:0 0 4px #000,0 3px 0 #7a0c10,0 0 14px #000;pointer-events:none;z-index:5;opacity:0}
+#float.show{animation:ft 1.5s forwards}
+#float.win{color:#ffe14d;font-size:52px}
+@keyframes ft{0%{opacity:0;transform:translateY(24px)}33.3%{opacity:1;transform:translateY(0)}86.7%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(0)}}
+.fly{position:absolute;left:50%;top:50%;font-weight:900;font-size:28px;color:#ff4d4d;text-shadow:0 0 5px #fff,0 0 3px #000;pointer-events:none;white-space:nowrap;z-index:4;animation:fly 1.2s ease-out forwards}
+.fly.zero{color:#ffe14d;font-size:26px;text-shadow:0 0 5px #000,0 0 3px #000}
+@keyframes fly{from{opacity:1;transform:translate(-50%,-50%) scale(.6)}to{opacity:0.5;transform:translate(-50%,-170%) scale(1.6)}}
+#kopop{position:absolute;left:50%;margin-left:-36px;top:32px;width:72px;border:3px solid #fff;border-radius:8px;overflow:hidden;opacity:0;pointer-events:none;z-index:6}
+#kopop.on{animation:kp 1s}
+#kopop svg{display:block;width:100%}
+@keyframes kp{0%{opacity:0;transform:translateY(8px)}22%{opacity:1;transform:none}70%{opacity:1}100%{opacity:0}}
+#podium{display:block;width:100%;margin-top:-4px}
+#gav{transform-origin:318px 30px;transition:transform .08s}
+#gav.hit{transform:rotate(-38deg)}
+#desk{position:relative;margin-top:2vh;}
+#tp{position:absolute;left:calc(50% - 3vh);transform:translateX(-50%);top:20%;width:12vh;height:13vh;padding:3px 4px;overflow:hidden;text-align:center;background:linear-gradient(#26465f,#0f2233);border:2px solid #86b3d6;border-radius:6px;box-shadow:inset 0 2px 8px rgba(255,255,255,.18);color:#d9f2ff;font-size:1.8vh;line-height:1.15;font-weight:700;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:3;flex-wrap:wrap;font-size:12px}
+#book{position:absolute;left:calc(50% + 8vh);transform:translateX(-50%);top:46%;width:9vh;height:10vh;background:#8f1018;border:2px solid #f0c14b;border-left:7px solid #6c0b11;border-radius:3px;box-shadow:inset 0 -5px 0 #f6efd8;color:#f0c14b;font-size:2.6vh;font-weight:700;letter-spacing:.1em;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2}
+#tpt{animation:tpin .25s}
+.py{font-size:.7em;color:#ffd36b;margin:0 1px}
+@keyframes tpin{from{opacity:.2;transform:translateY(6px)}to{opacity:1;transform:none}}
+.led{fill:#444;transition:fill .1s}
+.ring{opacity:0;transition:opacity .1s}
+#mic.on .led{fill:#ff3b30;filter:drop-shadow(0 0 4px #ff3b30)}
+#mic.on .ring{opacity:1;filter:drop-shadow(0 0 5px #ff3b30)}
+#over{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;z-index:9}
+#over.off{display:none}
+.card{background:var(--wall);border:4px solid var(--ink);border-radius:18px;padding:22px 26px;text-align:center;max-width:330px;width:88%}
+.card h1{margin:0 0 8px;font-size:34px;color:#c0262d}
+.card p{margin:6px 0;font-size:16px;line-height:1.5}
+button.go{margin-top:12px;font:inherit;font-weight:700;font-size:18px;padding:10px 26px;border-radius:12px;border:3px solid var(--ink);background:var(--gold);color:#2a1a12;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="hud"><span id="h1">第 0 任</span><span id="h2">通過 0 次</span><span id="h3">累計 0 票</span><button id="mute" aria-label="音效">🔊</button></div>
+  <div id="board"><h2>國家主席 <small id="best" style="font-size:12px;font-weight:400"></small></h2>
+    <div class="br"><span>同　意</span><b id="bY">0</b></div>
+    <div class="br"><span>不同意</span><b id="bN">0</b></div>
+    <div class="br"><span>棄　權</span><b id="bA">0</b></div></div>
+  <div id="bar"><i id="barfill"></i></div>
+  <div id="stage">
+    <svg id="bg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9a441"/><stop offset=".2" stop-color="#7a4a22"/><stop offset=".21" stop-color="#a8131a"/><stop offset="1" stop-color="#3f0509"/></linearGradient><radialGradient id="rg"><stop offset="0" stop-color="#fff3b0"/><stop offset="1" stop-color="#fff3b0" stop-opacity="0"/></radialGradient></defs>
+      <rect width="400" height="300" fill="url(#g)"/>
+      <g fill="#fff0a8"><circle cx="30" cy="12" r="4"/><circle cx="90" cy="12" r="4"/><circle cx="150" cy="12" r="4"/><circle cx="250" cy="12" r="4"/><circle cx="310" cy="12" r="4"/><circle cx="370" cy="12" r="4"/></g>
+      <circle cx="200" cy="26" r="40" fill="url(#rg)"/><circle cx="200" cy="26" r="20" fill="none" stroke="#f0c14b" stroke-width="3"/>
+      <polygon points="200,12 204,23 216,23 207,30 210,41 200,34 190,41 193,30 184,23 196,23" fill="#e5242b" stroke="#f0c14b"/>
+      <g stroke="#f0c14b" stroke-width="2" opacity=".6"><path d="M0 58H400M60 0V58M140 0V58M260 0V58M340 0V58"/></g></svg>
+    <div id="hall"></div>
+    <div id="float"></div>
+    <div id="kopop"><svg viewBox="0 0 120 150"><rect width="120" height="150" fill="#9b1118"/><rect y="118" width="120" height="32" fill="#c11a22"/>
+      <path d="M4 150Q6 80 46 80Q72 80 76 150Z" fill="#1b2230"/><path d="M38 82l8 18 8-18z" fill="#fff"/><path d="M44 86h4l2 24-4 6-4-6z" fill="#1c2f78"/>
+      <circle cx="46" cy="54" r="19" fill="#e3b48a"/><path d="M27 52Q27 30 46 30Q65 30 65 52Q58 40 27 52Z" fill="#111"/>
+      <path d="M36 52q3 3 6 0M52 52q3 3 6 0" stroke="#4a2a18" stroke-width="2" fill="none"/><path d="M37 62Q46 70 56 61" stroke="#6b2a1a" stroke-width="2.5" fill="none"/>
+      <rect x="54" y="104" width="12" height="16" rx="2" fill="#f5a623"/>
+      <path d="M40 150Q48 104 84 104Q118 104 120 150Z" fill="#141a26"/><path d="M78 106h10l-4 28z" fill="#fff"/><path d="M82 108h4l1 22-3 4-3-4z" fill="#243a8a"/>
+      <circle cx="84" cy="84" r="17" fill="#e8bd94"/><path d="M68 80Q70 66 84 66Q98 66 100 80Q92 72 68 80Z" fill="#111"/>
+      <g fill="none" stroke="#222" stroke-width="2"><circle cx="77" cy="85" r="6"/><circle cx="91" cy="85" r="6"/><path d="M83 85h2"/></g>
+      <path d="M74 94Q84 104 95 93" fill="#fff" stroke="#6b2a1a" stroke-width="2"/><rect x="96" y="120" width="11" height="15" rx="2" fill="#f5a623"/>
+      <rect x="22" y="112" width="40" height="10" rx="5" fill="#f4f4f4" transform="rotate(-24 42 117)"/></svg></div>
+  </div>
+  <div id="desk"><div id="tp">提詞機<div id="tpt">&nbsp;</div></div><div id="book">憲法</div>
+  <svg id="podium" viewBox="0 -34 400 124"><path d="M10 90L36 20H364L390 90Z" fill="#6e3a1c" stroke="#2a1a12" stroke-width="3"/><path d="M36 20H364" stroke="#e0a82e" stroke-width="5"/>
+    <g id="mic" transform="translate(-88 0)"><path d="M200 20C200 8 207 2 200 -8" stroke="#333" stroke-width="4" fill="none" stroke-linecap="round"/><circle class="ring" cx="200" cy="-19" r="15" fill="none" stroke="#ff3b30" stroke-width="2.5"/><circle cx="200" cy="-19" r="11" fill="#2a2a2e" stroke="#111" stroke-width="1.5"/><circle cx="200" cy="-19" r="8" fill="#55555c"/><path d="M192 -19h16M200 -27v16M194 -25l12 12M206 -25l-12 12" stroke="#222" stroke-width="1"/><circle class="led" cx="200" cy="-4" r="2.8"/></g>
+    <g id="pawL" transform="translate(-48 0)"><ellipse cx="110" cy="48" rx="34" ry="22" fill="#c98a2b"/><ellipse cx="110" cy="52" rx="15" ry="10" fill="#e9b25e"/><circle cx="92" cy="34" r="6" fill="#e9b25e"/><circle cx="104" cy="28" r="6" fill="#e9b25e"/><circle cx="118" cy="28" r="6" fill="#e9b25e"/><circle cx="130" cy="34" r="6" fill="#e9b25e"/></g>
+    <g id="pawR" transform="translate(40 0)"><ellipse cx="290" cy="48" rx="34" ry="22" fill="#c98a2b"/><ellipse cx="290" cy="52" rx="15" ry="10" fill="#e9b25e"/><g id="gav"><rect x="316" y="24" width="8" height="40" rx="3" fill="#a56a2a" transform="rotate(8 320 44)"/><rect x="304" y="18" width="34" height="14" rx="4" fill="#7a4a22" stroke="#2a1a12"/></g></g></svg></div>
+</div>
+<div id="over"><div class="card" id="card"><h1>沒有，通過！</h1>
+  <p>你是主席，同意多於不同意，你才能連任。</p>
+  <p>在計反對票前，輕點名人大代表就能直接懷念他。並且讓周圍的代表會害怕😨，下回合一定同意。</p><p>秘訣：只要反對比同意少就能連任，不一定要全部懷念，懷念時挑旁邊人多的即可達到威嚇效果。一定要把大手指搞上去，不要按錯人。</p>
+  <p id="bestline"></p><button class="go" id="start">開始會議</button></div></div>
+<script>
+const R=6,C=10,$=id=>document.getElementById(id),sleep=ms=>new Promise(r=>setTimeout(r,ms));
+let reps=[],round=0,passes=0,votes=0,phase='idle',rowsDone=0,scared=new Set(),Dn=0,shY=false,AC,mute=false,curShow,newRec=false,best={votes:0,passes:0};
+try{const b=JSON.parse(localStorage.getItem('ptb_best'));if(b&&b.votes)best=b}catch(e){}
+function bestTxt(){return best.votes?'最高紀錄：'+best.votes+' 票（連任 '+best.passes+' 次）':'尚無紀錄'}
+function renderBest(){$('best').textContent=best.votes?'最高 '+best.votes+' 票':'';const b=$('bestline');if(b)b.textContent=bestTxt()}
+function saveBest(){if(votes>best.votes){best={votes,passes};try{localStorage.setItem('ptb_best',JSON.stringify(best))}catch(e){}return true}return false}
+/* audio */
+function ac(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC}
+function tone(f,d,t='sine',v=.15,at=0,f2){if(mute)return;try{const a=ac(),o=a.createOscillator(),g=a.createGain(),s=a.currentTime+at;o.type=t;o.frequency.setValueAtTime(f,s);if(f2)o.frequency.exponentialRampToValueAtTime(f2,s+d);g.gain.setValueAtTime(v,s);g.gain.exponentialRampToValueAtTime(.001,s+d);o.connect(g).connect(a.destination);o.start(s);o.stop(s+d)}catch(e){}}
+function noise(d,v=.2,fr=1000,at=0,q=1){if(mute)return;try{const a=ac(),n=Math.floor(a.sampleRate*d),b=a.createBuffer(1,n,a.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=Math.random()*2-1;const s=a.createBufferSource();s.buffer=b;const f=a.createBiquadFilter();f.type='bandpass';f.frequency.value=fr;f.Q.value=q;const g=a.createGain(),t=a.currentTime+at;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);s.connect(f).connect(g).connect(a.destination);s.start(t)}catch(e){}}
+const sfx={
+ gavel(){noise(.12,.5,300);tone(140,.15,'square',.2,0,60);const g=$('gav');g.classList.add('hit');setTimeout(()=>g.classList.remove('hit'),120)},
+ rustle(){noise(.5,.1,3000,0,.5)},
+ tick(){tone(900,.05,'square',.06)},
+ zero(){tone(220,.3,'square',.1,0,150)},
+ ko(){tone(750,.25,'sine',.2,0,110);noise(.06,.2,1800)},
+ pass(){[523,659,784,1047].forEach((f,i)=>tone(f,.35,'triangle',.18,i*.14))},
+ fail(){tone(330,.7,'sawtooth',.14,0,90);tone(250,.7,'sawtooth',.1,.25,70)},
+ clap(){for(let i=0;i<110;i++)noise(.07,.1,1200+Math.random()*3000,Math.random()*3,.7)}
+};
+/* scene */
+const skins=['#e8bd94','#d9a577','#f0c9a4'],hairs=['#111','#222','#3a2a1a','#555'],ties=['#c0262d','#243a8a','#d9a21b','#1f7a3d'];
+function person(s){const k=skins[s%3],h=hairs[(s*7)%4],t=ties[(s*3)%4],d=(s*37%10)/10;
+return `<svg viewBox="0 0 40 46"><g class="seat"><rect x="5" y="14" width="30" height="32" rx="6" fill="#3a0509" opacity=".8"/><rect x="8" y="31" width="24" height="11" rx="4" fill="#5c0c12"/></g><g class="person"><g class="arm l" style="transform-origin:10px 30px;animation-delay:${d}s"><line x1="10" y1="30" x2="8" y2="44" stroke="#1d2433" stroke-width="6" stroke-linecap="round"/><circle cx="8" cy="44" r="3" fill="${k}"/></g><g class="arm r" style="transform-origin:30px 30px;animation-delay:${d}s"><line x1="30" y1="30" x2="32" y2="44" stroke="#1d2433" stroke-width="6" stroke-linecap="round"/><circle cx="32" cy="44" r="3" fill="${k}"/></g><path d="M5 46Q5 26 20 26Q35 26 35 46Z" fill="#1d2433"/><path d="M16 26L20 33 24 26Z" fill="#f4f4f4"/><path d="M19 29h2l1 7-2 3-2-3z" fill="${t}"/><circle cx="20" cy="15" r="8" fill="${k}"/><path d="M12 14Q12 6 20 6Q28 6 28 14Q24 9 12 14Z" fill="${h}"/><circle cx="17" cy="16" r="1" fill="#222"/><circle cx="23" cy="16" r="1" fill="#222"/><path d="M17 20Q20 22 23 20" stroke="#722" fill="none" stroke-width="1"/><g class="cry"><circle cx="20" cy="15" r="8" fill="${k}"/><path d="M12 14Q12 6 20 6Q28 6 28 14Q24 9 12 14Z" fill="${h}"/><path d="M14 15.5q2.5-3 5 0M21 15.5q2.5-3 5 0" stroke="#222" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M14 11.5l5 1.5M26 11.5l-5 1.5" stroke="#222" stroke-width="1"/><ellipse cx="20" cy="21" rx="3.4" ry="2.8" fill="#6a1414"/><ellipse class="tear" cx="15.5" cy="17.5" rx="2.2" ry="4" fill="#4fb3ff" stroke="#1d78d0" stroke-width=".5" style="animation-delay:${d}s"/><ellipse class="tear" cx="24.5" cy="17.5" rx="2.2" ry="4" fill="#4fb3ff" stroke="#1d78d0" stroke-width=".5" style="animation-delay:${d}s"/></g><g class="hands"><g class="hl"><line x1="12" y1="31" x2="18" y2="34" stroke="#2f3b5c" stroke-width="5" stroke-linecap="round"/><circle cx="18" cy="34" r="3.6" fill="${k}"/></g><g class="hr"><line x1="28" y1="31" x2="22" y2="34" stroke="#2f3b5c" stroke-width="5" stroke-linecap="round"/><circle cx="22" cy="34" r="3.6" fill="${k}"/></g></g></g><g class="kofx"><rect x="1" y="1" width="38" height="44" rx="6" fill="#ffd21f" stroke="#c98a00" stroke-width="2"/><circle cx="14" cy="19" r="5" fill="#fff" stroke="#222"/><circle cx="26" cy="19" r="5" fill="#fff" stroke="#222"/><circle cx="14" cy="19" r="1.7"/><circle cx="26" cy="19" r="1.7"/><ellipse cx="20" cy="33" rx="4" ry="5" fill="#722"/><path d="M8 9l-3-4M32 9l3-4M20 7V2" stroke="#222" stroke-width="2"/></g></svg>`}
+const hall=$('hall');
+for(let r=R-1;r>=0;r--){const row=document.createElement('div');row.className='row';row.id='row'+r;
+ for(let c=0;c<C;c++){const i=r*C+c,b=document.createElement('button');b.className='rep';b.innerHTML=person(i)+'<i class="em" style="animation-delay:'+(i*13%10)/10+'s">'+(Math.random()<.5?'👏':'😭')+'</i>';
+  b.addEventListener('pointerdown',e=>{e.preventDefault();hit(i)});reps[i]={el:b,r,c,v:'y',dead:false,fl:false,fear:false};row.appendChild(b)}
+ hall.appendChild(row)}
+function draw(i){const p=reps[i],s=curShow;let c='rep';if(p.dead)c+=p.fl?' ko':' dead';else{if(p.fear)c+=' fear';if(s&&p.v===s&&!(s==='n'&&p.r<rowsDone))c+=' '+s+' up';if(p.v==='n'&&p.r<rowsDone)c+=' rose'}p.el.className=c}
+function drawAll(s){curShow=s;reps.forEach((_,i)=>draw(i))}
+function board(){$('bY').textContent=shY?reps.filter(p=>!p.dead&&p.v==='y').length:0;$('bN').textContent=Dn;$('bA').textContent=reps.filter(p=>p.dead).length}
+function hud(){$('h1').textContent='🔁 第 '+round+' 任';$('h2').textContent='✅ 連任 '+passes+' 次';$('h3').textContent='🗳️ 累計 '+votes+' 票'}
+function talk(ms){const m=$('mic');m.classList.add('on');clearTimeout(talk.t);talk.t=setTimeout(()=>m.classList.remove('on'),ms)}
+const PW={'第':['Di4',4],'任':['Len4',2],'合':['He2',2],'請':['Qing3',3],'舉':['Ju3',6],'過':['Guo4',4],'通':['Tong1',1],'同':['Tong2',1],'意':['Yi4',1],'手':['Shou3',1],'沒':['Mei2',5],'有':['You3',1],'排':['Pai2',2],'票':['Piao4',3],'人':['Ren2',1],'不':['Bu4',0]};
+function tp(s){const a=[...s];let bi=-1,bw=-1;a.forEach((c,i)=>{const w=PW[c]?PW[c][1]:-1;if(w>bw){bw=w;bi=i}});const e=$('tpt');e.style.animation='none';void e.offsetWidth;e.style.animation='';e.innerHTML=a.map((c,i)=>c+(i===bi?'<span class="py">('+PW[c][0]+')</span>':'')).join('')}
+function banner(t,cls=''){talk(1400);tp(t.replace(/[^\u4e00-\u9fff0-9！!…：，、。？?]/g,''));const f=$('float');f.className='';void f.offsetWidth;f.textContent=t;f.className='show '+cls}
+function fly(k,n){const s=document.createElement('span');s.className='fly'+(n?'':' zero');s.textContent=n?n+'票':'沒有！！！';s.style.left=(n?8+Math.random()*84:25+Math.random()*50)+'%';$('row'+k).appendChild(s);setTimeout(()=>s.remove(),1300)}
+const mk=(bg,suit,tie,mood,extra='')=>{const E={wince:'<path d="M42 58l12 5-12 5M78 58l-12 5 12 5" stroke="#222" stroke-width="3" fill="none"/>',smirk:'<path d="M42 62h12M66 62h12" stroke="#222" stroke-width="3"/>',laugh:'<path d="M42 62q6-8 12 0M66 62q6-8 12 0" stroke="#222" stroke-width="3" fill="none"/>',talk:'<circle cx="48" cy="60" r="3.5" fill="#222"/><circle cx="72" cy="60" r="3.5" fill="#222"/>'}[mood],M={wince:'<path d="M48 84q12-9 24 0" stroke="#7a2a1a" stroke-width="3" fill="none"/>',smirk:'<path d="M48 80q16 8 26-4" stroke="#7a2a1a" stroke-width="3" fill="none"/>',laugh:'<path d="M44 76q16 22 32 0z" fill="#6a1414"/>',talk:'<ellipse cx="62" cy="80" rx="7" ry="5" fill="#6a1414"/>'}[mood];return '<rect width="120" height="150" fill="'+bg+'"/><path d="M6 150Q8 100 60 98Q112 100 114 150Z" fill="'+suit+'"/><path d="M50 98l10 18 10-18z" fill="#fff"/><path d="M57 102h6l2 28-5 6-5-6z" fill="'+tie+'"/><circle cx="60" cy="62" r="26" fill="#e6b78f"/><path d="M34 58Q32 32 60 32Q88 32 86 58Q76 44 34 58Z" fill="#161616"/>'+E+M+extra};
+const PT='<path d="M88 112L106 82" stroke="#242a3a" stroke-width="12" stroke-linecap="round"/><circle cx="107" cy="80" r="6" fill="#e6b78f"/><path d="M109 76l6-14" stroke="#e6b78f" stroke-width="5" stroke-linecap="round"/>';
+const KO=[$('kopop').innerHTML,...[
+mk('#8f1018','#1b2230','#b3262d','wince'),
+mk('#3a6fd8','#242a3a','#3b4a9a','talk',PT),
+mk('#b01a20','#1b2230','#d62828','smirk','<rect x="18" y="52" width="14" height="40" rx="6" fill="#dfe3ea" transform="rotate(-8 25 72)"/><path d="M22 110L26 80" stroke="#1b2230" stroke-width="12" stroke-linecap="round"/><path d="M24 96q-10 14 2 30" stroke="#aaa" fill="none" stroke-width="2"/>'),
+mk('#2f9e6a','#2a2a34','#c0392b','laugh',PT),
+mk('#c9b99a','#3f5a3c','#3f5a3c','talk','<rect x="8" y="114" width="104" height="34" rx="3" fill="#2b2f36"/><rect x="14" y="118" width="92" height="22" fill="#4a5568"/><circle cx="40" cy="134" r="7" fill="#e6b78f"/><circle cx="80" cy="134" r="7" fill="#e6b78f"/>'),
+mk('#d9c9a8','#3f5a3c','#3f5a3c','talk','<path d="M90 120L106 94" stroke="#3f5a3c" stroke-width="12" stroke-linecap="round"/><circle cx="108" cy="90" r="7" fill="#e6b78f"/><rect x="24" y="118" width="4" height="32" fill="#444"/><circle cx="26" cy="116" r="7" fill="#222"/>'),
+mk('#7b0c12','#1b2230','#4b63c8','smirk','<path d="M42 50l12-3M66 47l12 4" stroke="#161616" stroke-width="3"/>'),
+mk('#8fb8e8','#1b2230','#1b2230','smirk','<ellipse cx="86" cy="138" rx="30" ry="16" fill="#e6b78f" transform="rotate(-20 86 138)"/>')
+].map(s=>'<svg viewBox="0 0 120 150">'+s+'</svg>')];
+$('board').appendChild($('kopop'));let lastKO=-1;
+function koPop(){const k=$('kopop');let j;do{j=Math.floor(Math.random()*KO.length)}while(j===lastKO);lastKO=j;k.innerHTML=KO[j];k.classList.remove('on');void k.offsetWidth;k.classList.add('on')}
+function hit(i){const p=reps[i];if(phase!=='count'||p.dead||p.r<rowsDone)return;
+ p.dead=true;p.fl=true;sfx.ko();koPop();setTimeout(()=>{p.fl=false;draw(i)},700);
+ for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){if(!dr&&!dc)continue;const r=p.r+dr,c=p.c+dc;if(r<0||r>=R||c<0||c>=C)continue;const j=r*C+c;if(reps[j].dead)continue;scared.add(j);reps[j].fear=true}
+ drawAll(curShow);board()}
+async function play(){
+ round++;hud();phase='vote';rowsDone=0;Dn=0;shY=false;
+ let pN=.3+.05*(round-1);if(pN>.5)pN=.4+Math.random()*.2;const pY=1-pN;
+ reps.forEach((p,i)=>{p.fear=false;p.fl=false;p.v=p.dead?null:(scared.has(i)||Math.random()<pY)?'y':'n'});scared=new Set();
+ drawAll();board();
+ const bf=$('barfill');bf.style.transition='none';bf.style.transform='scaleX(1)';
+ banner('第 '+round+' 任');sfx.gavel();await sleep(1500);
+ banner('🙋同意的請舉手');await sleep(500);sfx.rustle();drawAll('y');shY=true;board();await sleep(1000);
+ banner('✋不同意的請舉手');await sleep(500);sfx.rustle();drawAll('n');
+ const ivk=k=>(.8+2/(round+k+2))*1000,T=[0,1,2,3,4,5].reduce((s,k)=>s+ivk(k),0);
+ phase='count';void bf.offsetWidth;bf.style.transition='transform '+T+'ms linear';bf.style.transform='scaleX(0)';
+ for(let k=0;k<R;k++){await sleep(ivk(k));
+  const n=reps.filter(p=>p.r===k&&!p.dead&&p.v==='n').length;Dn+=n;rowsDone=k+1;
+  fly(k,n);talk(600);tp('第'+(k+1)+'排，'+(n?n+'票':'沒有！！！'));n?sfx.tick():sfx.zero();drawAll(curShow);board()}
+ await sleep(500);phase='end';
+ const A=reps.filter(p=>!p.dead&&p.v==='y').length;
+ if(A>Dn){passes++;votes+=A;newRec=saveBest()||newRec;renderBest();hud();banner('🎉 通過！！','win');sfx.pass();await sleep(1000);const pk=()=>['👍','😭','🌹','⚘️','🌷','👏'].sort(()=>Math.random()-.5).slice(0,2),gy=pk(),gn=pk();reps.forEach(p=>{if(p.dead)return;const g=p.v==='y'?gy:gn;p.el.querySelector('.em').textContent=g[Math.random()<.5?0:1]});
+  drawAll();hall.classList.add('clap');sfx.clap();await sleep(3000);hall.classList.remove('clap');play()}
+ else{sfx.fail();banner('😭 沒有通過…');await sleep(1500);
+  $('card').innerHTML='<h1>沒有通過</h1><p>同意 '+A+' 票，不同意 '+Dn+' 票</p><p>連任次數：<b>'+passes+'</b><br>共收集同意票：<b>'+votes+'</b></p>'+(newRec?'<p>🏆 新紀錄！</p>':'')+'<p>'+bestTxt()+'</p><button class="go" id="start">重新投胎</button>';
+  $('start').onclick=begin;$('over').classList.remove('off')}}
+function begin(){ac();$('over').classList.add('off');round=0;passes=0;votes=0;newRec=false;scared=new Set();reps.forEach(p=>{p.dead=false;p.fl=false});hud();play()}
+$('start').onclick=begin;
+renderBest();$('mute').onclick=()=>{mute=!mute;$('mute').textContent=mute?'🔇':'🔊'};
+</script>
+</body>
+</html>
